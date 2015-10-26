@@ -4,7 +4,7 @@
 
 
 # spust MATLAB davkove
-matlab -nosplash -nodisplay -nodesktop -r "metacentrum_run(),exit(0)"
+matlab -nosplash -nodisplay -nodesktop -r "poc(),exit(0)"
 
 if [ $? -eq 1 ] ; then
  #MATLAB skoncil s chybou
