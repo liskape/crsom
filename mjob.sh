@@ -1,8 +1,15 @@
 #!/bin/bash
 module add matlab
 
+while 1
+    [tf msg] = license('checkout','Neural_Network_Toolbox');
+    if tf==1, break, end
+    display(strcat(datestr(now),' waiting for licence '));
+    pause(5);
+end
+
 # spust MATLAB davkove
-echo "exit(1)"|matlab -nosplash -nodisplay -nodesktop -r "metacentrum_run(),exit(0)" >$JOB_NAME.out 2>&1
+matlab -nosplash -nodisplay -nodesktop -r "poc(),exit(0)"
 
 if [ $? -eq 1 ] ; then
  #MATLAB skoncil s chybou
