@@ -1,23 +1,8 @@
-function [ plot ] = my_plot_som( examples, targets, N )
-
-if nargin > 3
-    error('TooManyInputs');
-end
-
-switch nargin
-    case 2
-        [rows cols] = size(examples);
-        N = floor(sqrt(rows));
-        N = N- 2
-end
-
-net = selforgmap([N, N],100, 3, 'gridtop', 'dist');
-net = train(net, examples');
-
-test = examples';
+function [ plot ] = my_plot_som( net, examples, targets )
 
 
-a = [vec2ind(net(test)); targets];
+N = net.layers{1}.dimensions(1);
+a = [vec2ind(net(examples)); targets];
 
 A = a(1,:);
 [n, bin] = histc(A, unique(A));
@@ -40,18 +25,18 @@ bad_neurons = unique(A(index));
 bad_neurons_map = ismember(a(1,:), bad_neurons);
 
 evaluation_with_misses = targets;
+
 evaluation_with_misses(bad_neurons_map) = max(targets) + 1;
 
+unique_to_plot = unique([a(1,:); evaluation_with_misses]', 'rows');
 
-unique_to_plot = unique([a(1,:); evaluation_with_misses]', 'rows')
 
-
-x = unique(a(1,:)')
+x = unique(a(1,:)');
 sizes = [x,histc(a(1,:)',x)];
 colors = colorize(unique_to_plot(:,2));
-s = scatter(row_idx(unique_to_plot(:,1),N), col_inx(unique_to_plot(:,1), N),sizes(:,2)*100, colors,'filled')
+s = scatter(row_idx(unique_to_plot(:,1),N), col_inx(unique_to_plot(:,1), N),sizes(:,2)*100, colors,'filled');
 
-unique_to_plot
+unique_to_plot;
 % results = [unique_to_plot(1); col_inx(a(1,:), N); evaluation_with_misses]
 
 % scatter = gscatter(row_idx(a(1,:),N), col_inx(a(1,:), N), evaluation)
