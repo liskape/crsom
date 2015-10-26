@@ -2,8 +2,7 @@
 #PBS -l matlab=1
 #PBS -l matlab_Neural_Network_Toolbox=1
 
-
-# spust MATLAB davkove
+add matlab
 matlab -nosplash -nodisplay -nodesktop -r "poc(),exit(0)"
 
 if [ $? -eq 1 ] ; then
