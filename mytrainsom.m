@@ -190,6 +190,7 @@ for epoch=0:param.epochs
     end
     
     % Each vector (or sequence of vectors) in order
+    e = [];
     for qq=1:trainQ
         
         q = trainInd(qq);
@@ -211,7 +212,7 @@ for epoch=0:param.epochs
                             [divData.T{ii,ts}],[divData.E{ii,ts}],gIW{i,j,ts},...
                             gA{i,ts},net.layers{i}.distances,fcn.param,IWLS{i,j}, net.userdata.context_net, net.userdata.targets(:,qq), epoch + 1, net);
              
-                        net.userdata.errors = [net.userdata.errors E];
+                        e = [e E];
 
                         net.IW{i,j} = net.IW{i,j} + dw;
                     end
@@ -245,8 +246,10 @@ for epoch=0:param.epochs
         end
     end
     
-    [perf,vperf,tperf] = nn7.trainValTestPerfs(net,data,fcns);
-end
+        net.userdata.errors = [net.userdata.errors mean(e)];
+
+        perf = mean(e);
+    end
 end
 
 % TODO - Add Validation
