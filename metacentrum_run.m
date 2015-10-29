@@ -5,8 +5,10 @@ function [ output_args ] = metacentrum_run( )
         display(strcat(datestr(now),' waiting for licence '));
         pause(5);
     end 
-
-    som = train_wine(1000);
-    save('wine_som-cn2-denorm-conf.mat', 'som');
+    
+    net_name = 'wine_som-cn2-denorm-conf-30000-epochs'
+    
+    som = train_wine(30000, net_name);
+    save(strcat(net_name,'.mat'), 'som');
 end
 

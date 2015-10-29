@@ -8,7 +8,7 @@ function [ som ] = create_crsom(inputs, targets)
     som.trainFcn = 'mytrainsom';
     som.inputWeights{1,1}.learnFcn = 'mylearnsom';
     som.trainParam.epochs = 100;
-    som.userdata = struct('context_net', context_net2(ones(nodes_size*nodes_size,1), ones(r_tar,1)), 'targets', targets, 'errors', []);
+    som.userdata = struct('context_net', context_net2(ones(nodes_size*nodes_size,1), ones(r_tar,1)), 'targets', targets, 'errors', [], 'net_name', '');
     
     som = configure(som, inputs);
 

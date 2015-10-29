@@ -1,4 +1,4 @@
-function [ crsom ] = train_wine( epochs )
+function [ crsom ] = train_wine( epochs, net_name)
     ds = csvread('wine.dat');
     inputs = ds(:, 2:14)';
     
@@ -7,6 +7,7 @@ function [ crsom ] = train_wine( epochs )
     
     crsom = create_crsom(inputs, targets);
     crsom.trainParam.epochs = epochs;
-
+    crsom.userdata.net_name = net_name;
+    
     crsom = train(crsom, inputs);
 end

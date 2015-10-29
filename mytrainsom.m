@@ -246,8 +246,9 @@ for epoch=0:param.epochs
         end
     end
     
-        net.userdata.errors = [net.userdata.errors mean(e)];
-
+%         net.userdata.errors = [net.userdata.errors mean(e)];
+        log_error(epoch, mean(e), net.userdata.net_name);
+             
         perf = mean(e);
     end
 end
