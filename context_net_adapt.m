@@ -1,7 +1,7 @@
 function [ delta_h, adjustments, E ] = context_net_adapt( cn,som, input, target, win, t, t_end )
    % constants
-   LR1=0.7;
-   LR2=0.01;
+   LR1=0.2;
+   LR2=0.1;
 
    [NEURONS, input_size] = size(som.IW{1});
    OUTPUTS = length(target);
@@ -24,6 +24,8 @@ function [ delta_h, adjustments, E ] = context_net_adapt( cn,som, input, target,
    end
 
    E = sum(power(O_k - target, 2)) / 2;
+   E
+
 
    % ?k(t) = (Ok(t)?Tk(t))Ok(t)(1?Ok(t)) -- delta rule
    delta_k = (O_k - target).*O_k.*(1 - O_k);
@@ -43,6 +45,7 @@ function [ delta_h, adjustments, E ] = context_net_adapt( cn,som, input, target,
     % prototype vectors adjustments ----------------------------------------
     % ?ih(t) = ?e?Iih(t) (?k(t)vik(t))
     % Wi(t+1)=Wi(t)+?2?ih(t)?(win,i,t)(X(t)?Wi(t))
+
     delta_h = zeros(NEURONS,1);
     adjustments = zeros(NEURONS,length(input));
     for i = 1:NEURONS
