@@ -146,13 +146,8 @@ function [dw,ls, E, max_delta, min_delta] = apply(w,p,z,n,a,t,e,gW,gA,d,lp,ls, c
 
   % Next learning statedw
   ls.step = ls.step + 1;
-  
-  if t_epoch == 4
-     t_epoch 
-  end
-  
+    
   [delta_h, adjust, E] = context_net_adapt( cn,som, p, target, find(a), t_epoch, som.trainParam.epochs );
-  
   
   dw = adjust;
 end

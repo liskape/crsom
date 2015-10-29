@@ -6,7 +6,7 @@ function [ output_args ] = metacentrum_run( )
         pause(5);
     end 
 
-    som = train_wine(1000);
-    save('wine_som.mat', 'som');
+    som = train_wine(30000);
+    save('wine_som-fixed-bias.mat', 'som');
 end
 

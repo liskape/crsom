@@ -10,4 +10,3 @@ function [ crsom ] = train_wine( epochs )
 
     crsom = train(crsom, inputs);
 end
-
