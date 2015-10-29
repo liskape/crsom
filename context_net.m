@@ -8,11 +8,11 @@ function [ cn ] = context_net( input, target )
 %   cn.trainFcn = 'trainlm';
 %   cn.performFcn = 'mse';
 
-  % Adaption
-%   cn.adaptFcn = 'adaptwb';
-%   cn.inputWeights{1,1}.learnFcn = 'learngdm';
-%   cn.layerWeights{find(cn.layerConnect)'}.learnFcn = 'learngdm';
-%   cn.biases{:}.learnFcn = 'learngdm';
+%   % Adaption
+% %   cn.adaptFcn = 'adaptwb';
+% %   cn.inputWeights{1,1}.learnFcn = 'learngdm';
+% %   cn.layerWeights{find(cn.layerConnect)'}.learnFcn = 'learngdm';
+% %   cn.biases{:}.learnFcn = 'learngdm';
   
   cn = configure(cn, input, target);
   [a,b] = size(cn.IW{1});

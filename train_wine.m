@@ -1,6 +1,6 @@
 function [ crsom ] = train_wine( epochs )
     ds = csvread('wine.dat');
-    inputs = normalize(ds(:, 2:14))';
+    inputs = ds(:, 2:14)';
     
     targets = ds(:, 1);
     targets = full(ind2vec(targets',3));

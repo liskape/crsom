@@ -207,13 +207,13 @@ for epoch=0:param.epochs
                     fcn = fcns.inputWeights(i,j).learn;
                     if fcn.exist
                         Pd = nntraining.pd(net,1,divData.Pc,divData.Pd,i,j,ts);
-                        [dw,IWLS{i,j}, E] = fcn.apply(net.IW{i,j}, ...
+                        [dw,IWLS{i,j}, E, new_cn] = fcn.apply(net.IW{i,j}, ...
                             Pd,divData.Zi{i,j},divData.N{i},divData.Ac{i,ts+net.numLayerDelays},...
                             [divData.T{ii,ts}],[divData.E{ii,ts}],gIW{i,j,ts},...
                             gA{i,ts},net.layers{i}.distances,fcn.param,IWLS{i,j}, net.userdata.context_net, net.userdata.targets(:,qq), epoch + 1, net);
              
                         e = [e E];
-
+                        net.userdata.context_net = new_cn;
                         net.IW{i,j} = net.IW{i,j} + dw;
                     end
                 end
