@@ -27,7 +27,19 @@ function [ delta_h, adjustments, E ] = context_net_adapt( cn,som, input, target,
  
    % ?k(t) = (Ok(t)?Tk(t))Ok(t)(1?Ok(t)) -- delta rule
    delta_k = (O_k - target).*O_k.*(1 - O_k);
-
+   
+    % prototype vectors adjustments ----------------------------------------
+    % ?ih(t) = ?e?Iih(t) (?k(t)vik(t))
+    % Wi(t+1)=Wi(t)+?2?ih(t)?(win,i,t)(X(t)?Wi(t))
+    delta_h = zeros(NEURONS,1);
+    adjustments = zeros(NEURONS,length(input));
+    for i = 1:NEURONS
+      first_part = -exp(-I_h(i));
+      sumation = sum(delta_k.* cn.IW{1}(i));
+      delta_h(i) =  first_part * sumation;
+      adjustments(i, :) =  (input' - som.IW{1}(i, :)) * sigma_neig(i) *  delta_h(i)* LR2;
+    end
+   
    % weights adjustments from 
    % v_ik(t + 1) = v_ik(t) ? ?1*?k(t)*O_ih(t)
    for k = 1:OUTPUTS
@@ -39,18 +51,5 @@ function [ delta_h, adjustments, E ] = context_net_adapt( cn,som, input, target,
    for k = 1:OUTPUTS
      cn.b{1}(k,:) = cn.b{1}(k,:) + ( (LR1* delta_k(k)))';
    end
-
-    % prototype vectors adjustments ----------------------------------------
-    % ?ih(t) = ?e?Iih(t) (?k(t)vik(t))
-    % Wi(t+1)=Wi(t)+?2?ih(t)?(win,i,t)(X(t)?Wi(t))
-
-    delta_h = zeros(NEURONS,1);
-    adjustments = zeros(NEURONS,length(input));
-    for i = 1:NEURONS
-      first_part = -exp(-I_h(i));
-      sumation = sum(delta_k.* cn.IW{1}(i));
-      delta_h(i) =  first_part * sumation;
-      adjustments(i, :) =  (input' - som.IW{1}(i, :)) * sigma_neig(i) *  delta_h(i)* LR2;
-    end
 end
 
