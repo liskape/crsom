@@ -6,7 +6,7 @@
 cd /storage/brno2/home/$USER/matlab/
 
 module add matlab
-matlab -nosplash -nodisplay -nodesktop -r -nojvm "metacentrum_run(),exit(0)"
+matlab -nojvm -nosplash -nodisplay -nodesktop -r  "metacentrum_run(),exit(0)"
 
 
 
