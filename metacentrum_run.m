@@ -6,9 +6,9 @@ function [ output_args ] = metacentrum_run( )
         pause(5);
     end 
     
-    net_name = 'wine_som-cn2-denorm-conf-30000-epochs'
+    net_name = 'wine_som-cn2-denorm-conf-1000-epochs'
     
-    som = train_wine(30000, net_name);
+    som = train_wine(1000, net_name);
     save(strcat(net_name,'.mat'), 'som');
 end
 
