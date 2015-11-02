@@ -31,5 +31,23 @@ function [adjustments, new_cn, E] = context_net_adapt2( cn,som, input, target, w
       delta_h(i) =  first_part * sumation;
       adjustments(i, :) =  (input' - som.IW{1}(i, :)) * sigma_neig(i) *  delta_h(i)* LR2;
     end
+    
+    if t == 50
+        t
+    end
+    
+     if t == 200
+        t
+        end
+    
+        
+     if t == 500
+        t
+     end
+    
+             
+     if t == 800
+        t
+    end
  end
 

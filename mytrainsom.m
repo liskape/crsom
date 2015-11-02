@@ -207,51 +207,24 @@ for epoch=0:param.epochs
                     fcn = fcns.inputWeights(i,j).learn;
                     if fcn.exist
                         Pd = nntraining.pd(net,1,divData.Pc,divData.Pd,i,j,ts);
-                        [dw,IWLS{i,j}, E, new_cn] = fcn.apply(net.IW{i,j}, ...
+                        [dw,IWLS{i,j}, E, new_cn, adjust] = fcn.apply(net.IW{i,j}, ...
                             Pd,divData.Zi{i,j},divData.N{i},divData.Ac{i,ts+net.numLayerDelays},...
                             [divData.T{ii,ts}],[divData.E{ii,ts}],gIW{i,j,ts},...
                             gA{i,ts},net.layers{i}.distances,fcn.param,IWLS{i,j}, net.userdata.context_net, net.userdata.targets(:,qq), epoch + 1, net);
              
                         e = [e E];
                         net.userdata.context_net = new_cn;
+                        net.userdata.max_adjusts = [net.userdata.max_adjusts adjust];
                         net.IW{i,j} = net.IW{i,j} + dw;
-                    end
-                end
-                
-                % Update Layer Weight Values
-                for j=find(net.layerConnect(i,:))
-                    fcn = fcns.layerWeights(i,j).learn;
-                    if fcn.exist
-                        Ad = cell2mat(divData.Ac(j,ts+net.numLayerDelays-net.layerWeights{i,j}.delays)');
-                        [dw,LWLS{i,j}] = fcn.apply(net.LW{i,j}, ...
-                            Ad,divData.Zl{i,j},divData.N{i},divData.Ac{i,ts+net.numLayerDelays},...
-                            [divData.T{ii,ts}],[divData.E{ii,ts}],gLW{i,j,ts},...
-                            gA{i,ts},net.layers{i}.distances,fcn.param,LWLS{i,j});
-                        net.LW{i,j} = net.LW{i,j} + dw;
-                    end
-                end
-                
-                % Update Bias Values
-                if net.biasConnect(i)
-                    fcn = fcns.biases(i).learn;
-                    if fcn.exist
-                        [db,BLS{i}] = fcn.apply(net.b{i}, ...
-                            BP,divData.Zb{i},divData.N{i},divData.Ac{i,ts+net.numLayerDelays},...
-                            [divData.T{ii,ts}],[divData.E{ii,ts}],gB{i,ts},...
-                            gA{i,ts},net.layers{i}.distances,fcn.param,BLS{i});
-                       net.b{i} = net.b{i} + db;
+                        
                     end
                 end
             end
         end
     end
     
-%         net.userdata.errors = [net.userdata.errors mean(e)];
+        net.userdata.errors = [net.userdata.errors mean(e)];
         log_error(epoch, mean(e), net.userdata.net_name);
-             
         perf = mean(e);
-    end
+end % epochs cycle
 end
-
-% TODO - Add Validation
-% TODO - Add silent/fast mode

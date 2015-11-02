@@ -1,5 +1,6 @@
 function [ plot ] = my_plot_som( net, examples, targets )
 
+targets = vec2ind(targets)
 
 N = net.layers{1}.dimensions(1);
 a = [vec2ind(net(examples)); targets];
