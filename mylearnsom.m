@@ -146,8 +146,16 @@ function [dw,ls, E, new_cn, max_adjust] = apply(w,p,z,n,a,t,e,gW,gA,d,lp,ls, cn,
 
   % Next learning statedw
   ls.step = ls.step + 1;
-    
+  
+  if t_epoch == 1
+     tic 
+  end
+  
   [adjust,new_cn, E] = context_net_adapt2( cn,som, p, target, find(a), t_epoch, som.trainParam.epochs );
+  
+  if t_epoch == 1
+     toc
+  end
   max_adjust = max(max(adjust));
   dw = adjust;
 end

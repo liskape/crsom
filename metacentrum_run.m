@@ -8,7 +8,7 @@ function [ output_args ] = metacentrum_run( )
 
     net_name = 'train_wine_v3'
     
-    som = train_wine(30000, net_name);
+    som = train_wine(1000, net_name);
     save(strcat(net_name,'.mat'), 'som');
     
 % copy train_wine to insert variables
