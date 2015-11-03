@@ -15,7 +15,6 @@ function [adjustments, new_cn, E] = context_net_adapt2( cn,som, input, target, w
    end
    
    
-   
    [new_cn,Y,delta_k,Pf,Af,tr] = adapt(cn, O_h, target);
 
    E = tr.perf;
