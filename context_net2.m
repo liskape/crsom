@@ -8,7 +8,6 @@ function [ cn ] = context_net2( input, target )
 %   cn.trainFcn = 'trainlm';
 %   cn.performFcn = 'mse';
 
-
    cn.adaptFcn = 'adaptwb';
    cn.inputWeights{1,1}.learnFcn = 'learngd';
    cn.layerWeights{find(cn.layerConnect)'}.learnFcn = 'learngd';

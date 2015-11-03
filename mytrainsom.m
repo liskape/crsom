@@ -214,7 +214,7 @@ for epoch=0:param.epochs
              
                         e = [e E];
                         net.userdata.context_net = new_cn;
-                        net.userdata.max_adjusts = [net.userdata.max_adjusts adjust];
+%                         net.userdata.max_adjusts = [net.userdata.max_adjusts adjust];
                         net.IW{i,j} = net.IW{i,j} + dw;
                         
                     end
@@ -224,7 +224,10 @@ for epoch=0:param.epochs
     end
     
         net.userdata.errors = [net.userdata.errors mean(e)];
-        log_error(epoch, mean(e), net.userdata.net_name);
+
+        if mod(epoch,100) == 0
+            log_error(epoch, mean(e), net.userdata.net_name);
+        end
         perf = mean(e);
 end % epochs cycle
 end

@@ -1,6 +1,6 @@
 function [ crsom ] = train_wine( epochs, net_name)
     ds = csvread('wine.dat');
-    inputs = ds(:, 2:14)';
+    inputs = mapminmaxT(ds(:, 2:14)');
     
     targets = ds(:, 1);
     targets = full(ind2vec(targets',3));
