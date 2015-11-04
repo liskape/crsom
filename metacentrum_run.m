@@ -1,9 +1,9 @@
 function metacentrum_run    
 % *************************************************************************
-  net_name = 'random-conf-IRIS-v3.3';
-  settings = 'Random prototype vectores, IRIS';
-  todo = 'Compare crsom and uc with plottings';
-  epochs = 1000;
+  net_name = 'normal-init-IRIS-3000epochs';
+  settings = 'normal init, IRIS';
+  todo = '1)Compare crsom and uc with plottings 2)check error 3)compare with IRIS 1000';
+  epochs = 3000;
 % -------------------------------------------------------------------------
   
     while 1
