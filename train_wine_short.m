@@ -5,6 +5,8 @@ function [ crsom, s_inputs, s_targets] = train_wine_short(epochs, net_name)
     targets = full(ind2vec(targets',3));
 
     % CROP inputs and targets
+%         s_inputs = mapminmaxT([ inputs(:, 1) inputs(:, 2)]);
+%     s_targets = [ targets(:, 1) targets(:, 2)];
     s_inputs = mapminmaxT([ inputs(:, 1) inputs(:, 2) inputs(:, 100) inputs(:, 111) inputs(:, 150) inputs(:, 160)]);
     s_targets = [ targets(:, 1) targets(:, 2)  targets(:, 100) targets(:, 111)  targets(:, 150) targets(:, 150)];
     % -------    
