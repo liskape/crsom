@@ -1,9 +1,9 @@
 function metacentrum_run    
 % *************************************************************************
-  net_name = 'normal-init-IRIS-3000epochs';
-  settings = 'normal init, IRIS';
-  todo = '1)Compare crsom and uc with plottings 2)check error 3)compare with IRIS 1000';
-  epochs = 3000;
+  net_name = 'realy-random-init-IRIS-1000epochs';
+  settings = 'realy random init, IRIS';
+  todo = '1)check plotsompos uc and crsom 2)check error, compare with other inits 3)check myplotsom';
+  epochs = 1000;
 % -------------------------------------------------------------------------
   
     while 1

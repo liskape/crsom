@@ -9,10 +9,10 @@ function [ som ] = create_crsom(inputs, targets)
    som.inputWeights{1,1}.learnFcn = 'mylearnsom';
     som.trainParam.epochs = 100;
    som.userdata = struct('context_net', context_net2(ones(nodes_size*nodes_size,1), ones(r_tar,1)), 'targets', targets, 'errors', [], 'net_name', '', 'max_adjusts', []);
-    som = configure(som, inputs);
+  som = configure(som, inputs);
     
 %     som = configure(som, rand(size(inputs)));
-% som.iw{1} = rand(size(som.IW{1}));
+  som.iw{1} = rand(size(som.IW{1}));
 
     % pretrain------------------------------
     % pre = selforgmap([10 10],10, 3, 'gridtop', 'dist');
