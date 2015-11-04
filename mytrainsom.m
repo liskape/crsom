@@ -225,9 +225,15 @@ for epoch=0:param.epochs
     
         net.userdata.errors = [net.userdata.errors mean(e)];
 
-        if mod(epoch,100) == 0
+        if mod(epoch, 100) == 0
             log_error(epoch, mean(e), net.userdata.net_name);
         end
+        
+         % create ~ 5 snaps
+        if mod(epoch,ceil(net.trainParam.epochs / 5)) == 0
+            net.userdata.history_snaps = [net.userdata.history_snaps {net.IW{1}}];
+        end        
+        
         perf = mean(e);
 end % epochs cycle
 end
