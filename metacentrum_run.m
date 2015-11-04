@@ -8,8 +8,8 @@ function [ output_args ] = metacentrum_run( )
 
     net_name = 'train_iris_v3.2'
     
-    som = train_iris(1000, net_name);
-    save(strcat(net_name,'.mat'), 'som');
+    crsom = train_iris(1000, net_name);
+    save(strcat(net_name,'.mat'), 'crsom');
     
     % copy train_wine to insert variables
 % [dummy_net, n, t] = train_wine_short(10) - input and targets
