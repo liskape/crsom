@@ -13,5 +13,11 @@ function [ output_args ] = plottings( crsom, inputs, targets )
      
      figure(3);
      plot_error(crsom);
+     
+     figure(4);
+     plotsompos(crsom)
+     
+     figure(5);
+     plotsomnd(crsom);
 end
 
