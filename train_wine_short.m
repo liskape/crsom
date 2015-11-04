@@ -13,7 +13,7 @@ function [ crsom, s_inputs, s_targets] = train_wine_short(epochs, net_name)
 
     crsom = create_crsom(s_inputs, s_targets );
     crsom.trainParam.epochs = epochs;
-%     crsom.trainParam.showWindow = false;
+    crsom.trainParam.showWindow = false;
     crsom.userdata.net_name = net_name;
     
     crsom = train(crsom, s_inputs);
