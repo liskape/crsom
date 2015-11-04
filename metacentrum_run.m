@@ -6,9 +6,9 @@ function [ output_args ] = metacentrum_run( )
         pause(5);
     end 
 
-    net_name = 'train_wine_v3.2'
+    net_name = 'train_iris_v3.2-3000-epochs'
     
-    crsom = train_wine(1000, net_name);
+    crsom = train_iris(3000, net_name);
     save(strcat(net_name,'.mat'), 'crsom');
     
     % copy train_wine to insert variables

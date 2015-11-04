@@ -11,6 +11,14 @@ function [ output_args ] = train_wine_short_spec(regenerate)
         load('train_wine_short_spec_net_n_net');
         load('train_wine_short_spec_t');
         
+        if ~isequal(actual_n, n);
+            error('input FAIL');
+        end
+        
+        if ~isequal(actual_t, t);
+            error('target FAIL');
+        end
+        
         if ~isequal(net.IW{1},actual_net.IW{1});
             error('FAIL');
         else
