@@ -1,9 +1,9 @@
 function metacentrum_run    
 % *************************************************************************
   % dataset-epochs-version-additional_info
-  net_name = 'WINE-1000-normconf-LR2-0_1';
-  settings = 'WINE, 1000 epochs, normal config, LR2 = 0.1';
-  todo =     '1)result should be the same as hartono16';
+  net_name = 'IRIS-1000-randomconf-LR2-0_1-normalized';
+  settings = 'IRIS, 1000 epochs, normal config, LR2 = 0.1';
+  todo =     'hartono16 recreate experiment';
   epochs = 1000;
 % -------------------------------------------------------------------------
   
@@ -14,7 +14,7 @@ function metacentrum_run
         pause(5);
     end 
 
-    [crsom, in, ta, uc ] = train_wine(epochs, net_name);
+    [crsom, in, ta, uc ] = train_iris(epochs, net_name);
     save(strcat(net_name,'.mat'));
 end
 
