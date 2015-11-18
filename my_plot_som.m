@@ -2,19 +2,27 @@ function [ plot ] = my_plot_som( net, examples, targets )
 
 targets = vec2ind(targets);
 
+% neuron map side
 N = net.layers{1}.dimensions(1);
+
+% (example) -> [neuron, class]
 a = [vec2ind(net(examples)); targets];
 
+% classes for neuron 28
+% a(2, (a(1,:) == 28))
+
 A = a(1,:);
+% n = how many in each bucket
+% bin: (example) -> bin
 [n, bin] = histc(A, unique(A));
+
+% find bins with multiple assigned examples
 multiple = find(n > 1);
-index_multiple_occurences    = find(ismember(bin, multiple)); % multiple occurences
 
+% multiple occurence
+index_multiple_occurences = find(ismember(bin, multiple)); 
 
-% delete later
-% a(2, 11) = 2;
-% ---------------
-
+% [neuron, class] ([a,1], [a,2] means miss)
 unique_misses = unique(a(:,index_multiple_occurences)','rows')';
 
 A = (unique_misses(1,:));
