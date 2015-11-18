@@ -1,10 +1,10 @@
 function metacentrum_run    
 % *************************************************************************
   % dataset-epochs-version-additional_info
-  net_name = 'WINE-2000-normconf';
-  settings = 'WINE, 2000 epochs, normal config';
+  net_name = 'WINE-5000-normconf';
+  settings = 'WINE, 5000 epochs, normal config';
   todo =     '1)look at result | 2)look at history of map formation';
-  epochs = 2000;
+  epochs = 5000;
 % -------------------------------------------------------------------------
   
     while 1
