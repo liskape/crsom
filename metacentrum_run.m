@@ -1,9 +1,9 @@
 function metacentrum_run    
 % *************************************************************************
   % dataset-epochs-version-additional_info
-  net_name = 'WINE-1000-normconf-LR2-0_1';
-  settings = 'WINE, 1000 epochs, normal config, LR2 = 0.1';
-  todo =     '1)result should be the same as hartono16';
+  net_name = 'WINE-1000-normconf-LR2-0_1-denorm';
+  settings = 'WINE, 1000 epochs, normal config, LR2 = 0.1, without normalization';
+  todo =     '1)result should be the same as hartono16 2) compare with normalized version';
   epochs = 1000;
 % -------------------------------------------------------------------------
   
