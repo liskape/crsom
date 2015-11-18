@@ -1,10 +1,10 @@
 function metacentrum_run    
 % *************************************************************************
   % dataset-epochs-version-additional_info
-  net_name = 'WINE-5000-normconf';
-  settings = 'WINE, 5000 epochs, normal config';
-  todo =     '1)look at result | 2)look at history of map formation';
-  epochs = 5000;
+  net_name = 'WINE-1000-normconf-LR2-0_1';
+  settings = 'WINE, 1000 epochs, normal config, LR2 = 0.1';
+  todo =     '1)result should be the same as hartono16';
+  epochs = 1000;
 % -------------------------------------------------------------------------
   
     while 1

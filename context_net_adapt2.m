@@ -1,6 +1,6 @@
 function [adjustments, new_cn, E] = context_net_adapt2( cn, som, input, target, win, t, t_end )
 
-   LR2=0.01;
+   LR2=0.1;
 
    [NEURONS, input_size] = size(som.IW{1});
    OUTPUTS = length(target);
