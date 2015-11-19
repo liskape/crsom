@@ -1,6 +1,7 @@
 function [ crsom, inputs, targets, untrained ] = train_iris( epochs, net_name)
     load iris_dataset 
-    inputs = mapminmaxT(irisInputs');
+%     inputs = mapminmaxT(irisInputs');
+     inputs = irisInputs
     inputs = inputs'
     targets = irisTargets;    
     crsom = create_crsom(inputs, targets);
