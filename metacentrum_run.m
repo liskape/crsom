@@ -14,7 +14,7 @@ function metacentrum_run
         pause(5);
     end 
 
-    [crsom, in, ta, uc ] = train_iris(epochs, net_name);
+    [crsom, in, ta, uc ] = train_iris(epochs, net_name, false);
     save(strcat(net_name,'.mat'));
 end
 
