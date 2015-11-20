@@ -1,10 +1,10 @@
 function metacentrum_run    
 % *************************************************************************
 % dataset-epochs-version-additional_info
-settings = 'IRIS2DIM, 1000 epochs, normal config, LR2 = 0.1, normalize';
+settings = 'IRIS, 5000 epochs, normal config, LR2 = 0.01, normalize';
 net_name = regexprep(settings,'[^\w'']','-');
-todo =     'look at results, clusters should be far away from each other';
-epochs = 1000;
+todo =     'compare with 2Kepochs';
+epochs = 5000;
 normalize = true;
 LR2 = 0.01;
 % -------------------------------------------------------------------------
@@ -16,7 +16,7 @@ LR2 = 0.01;
         pause(5);
     end 
 
-    [crsom, in, ta, uc ] = train_iris2dim(epochs, net_name, normalize, LR2);
+    [crsom, in, ta, uc ] = train_iris(epochs, net_name, normalize, LR2);
     save(strcat(net_name,'.mat'));
 end
 

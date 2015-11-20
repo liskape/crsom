@@ -229,8 +229,8 @@ for epoch=0:param.epochs
             log_error(epoch, mean(e), net.userdata.net_name);
         end
         
-         % create ~ 20 snaps
-        if mod(epoch, ceil(net.trainParam.epochs / 20)) == 0
+         % create ~ 8 snaps
+        if mod(epoch, ceil(net.trainParam.epochs / 8)) == 0
             net.userdata.history_snaps = [net.userdata.history_snaps {net.IW{1}}];
         end        
         
