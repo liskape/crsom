@@ -1,12 +1,12 @@
 function metacentrum_run    
 % *************************************************************************
 % dataset-epochs-version-additional_info
-settings = 'IRIS, 1000 epochs, normal config, LR2 = 0.1, normalize';
-net_name = regexprep(settings,'[^\w'']','_');
-todo =     'recontruct result, see map formation - compare with LR 0.01';
-epochs = 1000;
+settings = 'IRIS, 2000 epochs, normal config, LR2 = 0.01, normalize';
+net_name = regexprep(settings,'[^\w'']','-');
+todo =     'recontruct result, see map formation - compare with LR 0.01, 1000epochs';
+epochs = 2000;
 normalize = true;
-LR2 = 0.1;
+LR2 = 0.01;
 % -------------------------------------------------------------------------
   
     while 1
