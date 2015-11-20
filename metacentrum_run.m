@@ -1,7 +1,7 @@
 function metacentrum_run    
 % *************************************************************************
   % dataset-epochs-version-additional_info
-  net_name = 'IRIS-1000-randomconf-LR2-0_1-denormalized';
+  net_name = 'IRIS-1000-normalconf-LR2-0_1-denormalized';
   settings = 'IRIS, 1000 epochs, normal config, LR2 = 0.1 denormalize';
   todo =     '1)hartono16 recreate experiment 2) compare to IRIS-1000-randomconf-LR2-0_1-normalized';
   epochs = 1000;
