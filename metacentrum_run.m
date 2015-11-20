@@ -1,10 +1,12 @@
 function metacentrum_run    
 % *************************************************************************
 % dataset-epochs-version-additional_info
-net_name = 'IRIS-100-normalconf-LR2-0_1-normalized';
-settings = 'IRIS, 100 epochs, normal config, LR2 = 0.1 normalize';
-todo =     '';
-epochs = 100;
+settings = 'IRIS, 1000 epochs, normal config, LR2 = 0.01, normalize';
+net_name = settings
+todo =     'recontruct result, see map formation';
+epochs = 1000;
+normalize = true;
+LR2 = 0.01;
 % -------------------------------------------------------------------------
   
     while 1
@@ -14,7 +16,7 @@ epochs = 100;
         pause(5);
     end 
 
-    [crsom, in, ta, uc ] = train_iris(epochs, net_name, true, 0.1);
+    [crsom, in, ta, uc ] = train_iris(epochs, net_name, normalize, LR2);
     save(strcat(net_name,'.mat'));
 end
 
