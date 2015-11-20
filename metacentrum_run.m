@@ -1,10 +1,10 @@
 function metacentrum_run    
 % *************************************************************************
 % dataset-epochs-version-additional_info
-net_name = 'IRIS-1000-normalconf-LR2-0_1-normalized';
-settings = 'IRIS, 1000 epochs, normal config, LR2 = 0.1 normalize';
-todo =     '1)hartono16 recreate experiment 2) compare to IRIS-1000-normalconf-LR2-0_1-normalized';
-epochs = 1000;
+net_name = 'IRIS-100-normalconf-LR2-0_1-normalized';
+settings = 'IRIS, 100 epochs, normal config, LR2 = 0.1 normalize';
+todo =     '';
+epochs = 100;
 % -------------------------------------------------------------------------
   
     while 1
@@ -14,7 +14,7 @@ epochs = 1000;
         pause(5);
     end 
 
-    [crsom, in, ta, uc ] = train_iris(epochs, net_name, true);
+    [crsom, in, ta, uc ] = train_iris(epochs, net_name, true, 0.1);
     save(strcat(net_name,'.mat'));
 end
 

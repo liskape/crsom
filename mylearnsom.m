@@ -113,7 +113,7 @@ function err = check_param(param)
   err = '';
 end
 
-function [dw,ls, E, new_cn, max_adjust] = apply(w,p,z,n,a,t,e,gW,gA,d,lp,ls, cn, target, t_epoch, som)
+function [dw,ls, E, new_cn, max_adjust] = apply(w,p,z,n,a,t,e,gW,gA,d,lp,ls, cn, target, t_epoch, som, LR2)
 
   % Initial learning state
   if isempty(ls)
@@ -151,7 +151,7 @@ function [dw,ls, E, new_cn, max_adjust] = apply(w,p,z,n,a,t,e,gW,gA,d,lp,ls, cn,
      tic 
   end
   
-  [adjust,new_cn, E] = context_net_adapt2( cn,som, p, target, find(a), t_epoch, som.trainParam.epochs );
+  [adjust,new_cn, E] = context_net_adapt2( cn,som, p, target, find(a), t_epoch, som.trainParam.epochs, LR2 );
   
   if t_epoch == 1
      toc

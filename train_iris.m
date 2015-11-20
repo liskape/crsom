@@ -1,4 +1,4 @@
-function [ crsom, inputs, targets, untrained ] = train_iris( epochs, net_name, normalized)
+function [ crsom, inputs, targets, untrained, lr2 ] = train_iris( epochs, net_name, normalized, LR2)
     load iris_dataset
     
     if normalized
@@ -9,7 +9,7 @@ function [ crsom, inputs, targets, untrained ] = train_iris( epochs, net_name, n
     end
   
     targets = irisTargets;    
-    crsom = create_crsom(inputs, targets);
+    crsom = create_crsom(inputs, targets, LR2);
     
     crsom.trainParam.epochs = epochs;
     crsom.userdata.net_name = net_name;

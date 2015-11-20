@@ -1,6 +1,4 @@
-function [adjustments, new_cn, E] = context_net_adapt2( cn, som, input, target, win, t, t_end )
-
-   LR2=0.1;
+function [adjustments, new_cn, E] = context_net_adapt2( cn, som, input, target, win, t, t_end, LR2 )
 
    [NEURONS, input_size] = size(som.IW{1});
    OUTPUTS = length(target);
@@ -22,31 +20,6 @@ function [adjustments, new_cn, E] = context_net_adapt2( cn, som, input, target, 
    d = repmat(input', NEURONS, 1)  - som.IW{1};
   
    adjustments = d.* repmat(koefs, 1, input_size);
-    
-    
-%      sigma_neig
-%     LR2
-    
-%     if t == 1
-%         t
-%     end
-% 
-%     if t == 5
-%         t
-%     end
-%     
-%      if t == 10
-%         t
-%      end
-%     
-%         
-%      if t == 18
-%         t
-%      end
-%     
-%              
-%      if t == 800
-%         t
-%     end
+
  end
 
