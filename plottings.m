@@ -29,5 +29,10 @@ function [ output_args ] = plottings( crsom, uc, inputs, targets )
      figure(3)
      plotsomnd(crsom);
      title('plotsomnd for trained CRSOM');
+     
+     figure(4)
+     animate_map_formation( crsom, inputs, targets);
+     title(crsom.userdata.net_name);
+     
 end
 
