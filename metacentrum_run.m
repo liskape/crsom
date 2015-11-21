@@ -3,7 +3,7 @@ function metacentrum_run
 % dataset-epochs-version-additional_info
 settings = 'IRIS2DIM, 1000 epochs, normal config, LR2 = 0.1, NOT normalized';
 net_name = regexprep(settings,'[^\w'']','-');
-todo =     'should have clusters far away from each other (better than 0.01)';
+todo =     'compare to normalized version';
 epochs = 1000;
 normalize = false;
 LR2 = 0.1;

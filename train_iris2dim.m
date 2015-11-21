@@ -4,9 +4,9 @@ function [ crsom, inputs, targets, untrained, lr2 ] = train_iris2dim( epochs, ne
     
     if normalized
         inputs = mapminmaxT(irisInputs(1:2,1:100)');
-        inputs = inputs'
+        inputs = inputs';
     else
-        inputs = irisInputs
+        inputs = irisInputs(1:2, 1:100);
     end
   
     targets = irisTargets(:, 1:100);    
