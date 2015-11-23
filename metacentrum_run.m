@@ -1,10 +1,10 @@
 function metacentrum_run    
 % *************************************************************************
 % dataset-epochs-version-additional_info
-settings = '2DIMIris-1000-0.01-200-0.01-false';
+settings = '2DIMIris-3000-0.01-200-0.01-false';
 net_name = regexprep(settings,'[^\w'']','-');
 todo =     'divide clusters :(';
-epochs = 1000;
+epochs = 3000;
 normalize = false;
 LR2 = 0.01;
 s_0 = 200;
