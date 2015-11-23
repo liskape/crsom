@@ -1,12 +1,12 @@
 function metacentrum_run    
 % *************************************************************************
 % dataset-epochs-version-additional_info
-settings = '2DIMIris-1000-0.1-200-0.01-true';
+settings = '2DIMIris-1000-0.01-200-0.01-false';
 net_name = regexprep(settings,'[^\w'']','-');
-todo =     'look at error and map formation - should divide clusters, compare to 2DIMIris-1000-0.1-50-0.1-true';
+todo =     'divide clusters :(';
 epochs = 1000;
-normalize = true;
-LR2 = 0.1;
+normalize = false;
+LR2 = 0.01;
 s_0 = 200;
 s_end = 0.01;
 
