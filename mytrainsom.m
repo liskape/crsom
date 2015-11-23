@@ -210,11 +210,11 @@ for epoch=0:param.epochs
                         [dw,IWLS{i,j}, E, new_cn, adjust] = fcn.apply(net.IW{i,j}, ...
                             Pd,divData.Zi{i,j},divData.N{i},divData.Ac{i,ts+net.numLayerDelays},...
                             [divData.T{ii,ts}],[divData.E{ii,ts}],gIW{i,j,ts},...
-                            gA{i,ts},net.layers{i}.distances,fcn.param,IWLS{i,j}, net.userdata.context_net, net.userdata.targets(:,qq), epoch + 1, net, net.userdata.lr2);
+                            gA{i,ts},net.layers{i}.distances,fcn.param,IWLS{i,j}, net.userdata.context_net, net.userdata.targets(:,qq), epoch + 1, net, net.userdata.lr2, net.userdata.s_0, net.userdata.s_end);
              
                         e = [e E];
                         net.userdata.context_net = new_cn;
-%                         net.userdata.max_adjusts = [net.userdata.max_adjusts adjust];
+                        net.userdata.max_adjusts = [net.userdata.max_adjusts adjust];
                         net.IW{i,j} = net.IW{i,j} + dw;
                         
                     end
@@ -222,7 +222,8 @@ for epoch=0:param.epochs
             end
         end
     end
-    
+        
+
         net.userdata.errors = [net.userdata.errors mean(e)];
 
         if mod(epoch, 100) == 0

@@ -22,13 +22,13 @@ function [ output_args ] = plottings( crsom, uc, inputs, targets )
      plot_error(crsom);
      title('CRSOM error');
      
-     figure(2)  
-     plotsompos(crsom, inputs);
-     title('plotsompos for trained CRSOM');
-
-     figure(3)
-     plotsomnd(crsom);
-     title('plotsomnd for trained CRSOM');
+%      figure(2)  
+%      plotsompos(crsom, inputs);
+%      title('plotsompos for trained CRSOM');
+% 
+%      figure(3)
+%      plotsomnd(crsom);
+%      title('plotsomnd for trained CRSOM');
      
      figure(4)
      animate_map_formation( crsom, inputs, targets);

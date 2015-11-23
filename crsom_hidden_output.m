@@ -1,5 +1,5 @@
-function [result, neighborhood_restiction, I, s] = crsom_hidden_output(map, input, neurons, win, t, t_end)
-    neighborhood_restiction = crsom_o( win, 1:neurons, t, map.layers{1}.distances, t_end);
+function [result, neighborhood_restiction, I, s] = crsom_hidden_output(map, input, neurons, win, t, t_end, s_0, send)
+    neighborhood_restiction = crsom_o( win, 1:neurons, t, map.layers{1}.distances, t_end, s_0, send);
     w = map.IW{1};
     
     d = repmat(input, neurons, 1) - w;

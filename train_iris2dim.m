@@ -1,4 +1,4 @@
-function [ crsom, inputs, targets, untrained, lr2 ] = train_iris2dim( epochs, net_name, normalized, LR2)
+function [ crsom, inputs, targets, untrained, lr2 ] = train_iris2dim( epochs, net_name, normalized, LR2, s0, s_end)
   
    load iris_dataset
     
@@ -10,7 +10,7 @@ function [ crsom, inputs, targets, untrained, lr2 ] = train_iris2dim( epochs, ne
     end
   
     targets = irisTargets(:, 1:100);    
-    crsom = create_crsom(inputs, targets, LR2);
+    crsom = create_crsom(inputs, targets, LR2, s0, s_end);
     
     crsom.trainParam.epochs = epochs;
     crsom.userdata.net_name = net_name;

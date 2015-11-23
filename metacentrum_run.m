@@ -1,12 +1,15 @@
 function metacentrum_run    
 % *************************************************************************
 % dataset-epochs-version-additional_info
-settings = 'wtf 1 cluster 3000';
+settings = 'IRIS2DIM-1000-0.1-50-0.1-true';
 net_name = regexprep(settings,'[^\w'']','-');
-todo =     'should create one cluster';
-epochs = 3000;
+todo =     'look at error and map formation - should divide clusters';
+epochs = 1000;
 normalize = true;
 LR2 = 0.1;
+s_0 = 50;
+s_end = 0.1;
+
 % -------------------------------------------------------------------------
   
     while 1
@@ -16,7 +19,7 @@ LR2 = 0.1;
         pause(5);
     end 
 
-    [crsom, in, ta, uc ] = train_iris2dim(epochs, net_name, normalize, LR2);
+    [crsom, in, ta, uc ] = train_iris2dim(epochs, net_name, normalize, LR2, s_0, s_end );
     save(strcat(net_name,'.mat'));
 end
 
