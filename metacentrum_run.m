@@ -1,7 +1,7 @@
 function metacentrum_run    
 % *************************************************************************
 % dataset-epochs-version-additional_info
-settings = 'IRIS2DIM-1000-0.1-50-0.1-true';
+settings = '2DIMIris-1000-0.1-50-0.1-true';
 net_name = regexprep(settings,'[^\w'']','-');
 todo =     'look at error and map formation - should divide clusters';
 epochs = 1000;
