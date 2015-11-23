@@ -1,11 +1,11 @@
 function metacentrum_run    
 % *************************************************************************
 % dataset-epochs-version-additional_info
-settings = 'IRIS2DIM, 1000 epochs, normal config, LR2 = 0.1, NOT normalized';
+settings = 'wtf 1 cluster 3000';
 net_name = regexprep(settings,'[^\w'']','-');
-todo =     'compare to normalized version';
-epochs = 1000;
-normalize = false;
+todo =     'should create one cluster';
+epochs = 3000;
+normalize = true;
 LR2 = 0.1;
 % -------------------------------------------------------------------------
   
