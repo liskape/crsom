@@ -6,19 +6,19 @@ function [ output_args ] = plottings( crsom, uc, inputs, targets )
     som = train(som, inputs);
      
      figure(1);
-     subplot(2,2,1)
+     subplot(2,2,1);
      my_plot_som(som, inputs, targets);
      title('Classic trained SOM');
      
-     subplot(2,2,2)
+     subplot(2,2,2);
      my_plot_som(crsom, inputs, targets);  
      title(crsom.userdata.net_name);
  
-     subplot(2,2,4)
+     subplot(2,2,4);
      my_plot_som(uc, inputs, targets);
      title('CRSOM before training (only configured)');
      
-     subplot(2,2,3)
+     subplot(2,2,3);
      plot_error(crsom);
      title('CRSOM error');
      
@@ -30,9 +30,10 @@ function [ output_args ] = plottings( crsom, uc, inputs, targets )
 %      plotsomnd(crsom);
 %      title('plotsomnd for trained CRSOM');
      
-     figure(4)
+     figure(4);
      animate_map_formation( crsom, inputs, targets);
      title(crsom.userdata.net_name);
      
+     SRI(crsom, inputs, targets)
 end
 

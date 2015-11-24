@@ -1,13 +1,15 @@
-function [adjustments, new_cn, E, sigma_neig] = context_net_adapt2( cn, som, input, target, win, t, t_end, LR2, s_0, s_end )
+function [adjustments, new_cn, E, O_h, s, sigma_neig] = context_net_adapt2( cn, som, input, target, win, t, t_end, LR2, s_0, s_end )
 
    [NEURONS, input_size] = size(som.IW{1});
    OUTPUTS = length(target);
    
    [O_h, sigma_neig, I_h, s] = crsom_hidden_output(som, input', NEURONS, win, t, t_end, s_0, s_end);
-   [new_cn,Y,E, delta_k] = myadapt(cn, O_h, target);
+   [new_cn,Y,e,Pf,Af,tr] = adapt(cn, O_h, target);
 
+   E = tr.perf;
    
-%   delta_k = (Y - target).* Y.* (1 - Y);
+   
+ delta_k = (Y - target).* Y.* (1 - Y);
    
    first_part = -exp(-I_h);
    delta_ks = repmat(delta_k', NEURONS, 1);

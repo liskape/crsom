@@ -9,7 +9,7 @@ function [ crsom, inputs, targets, untrained, lr2 ] = train_iris2dim( epochs, ne
         inputs = irisInputs(1:2, 1:100);
     end
   
-    targets = irisTargets(:, 1:100);    
+    targets = irisTargets(1:2, 1:100);    
     crsom = create_crsom(inputs, targets, LR2, s0, s_end);
     
     crsom.trainParam.epochs = epochs;
