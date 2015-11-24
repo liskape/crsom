@@ -34,6 +34,13 @@ function [ output_args ] = plottings( crsom, uc, inputs, targets )
      animate_map_formation( crsom, inputs, targets);
      title(crsom.userdata.net_name);
      
+%      figure(5);
+%      animate_position_formation(crsom, inputs);
+%      title(crsom.userdata.net_name);
+     
+    figure(6);
+    plotsompos(som, inputs);
+    
      SRI(crsom, inputs, targets)
 end
 

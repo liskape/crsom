@@ -1,14 +1,14 @@
 function metacentrum_run    
 % *************************************************************************
 % dataset-epochs-version-additional_info
-settings = '2DimIris-1000(realy)';
+settings = 'dunno';
 net_name = regexprep(settings,'[^\w'']','-');
-todo =     'will see, what happens, divide clusters :( ';
-epochs = 1000;
-normalize = true;
-LR2 = 0.1;
+todo =     'will see, what happens, divide clusters :( - check animate position formation';
+epochs = 500;
+normalize = false;
+LR2 = 0.01;
 s_0 = 200;
-s_end = 0.05;
+s_end = 0.01;
 
 % -------------------------------------------------------------------------
   

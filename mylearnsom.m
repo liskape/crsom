@@ -157,9 +157,9 @@ function [dw,ls, E, new_cn, mean_adjusts, mean_O_h, first_part, second_part] = a
      toc
   end
   
-%   if E > 0.025
-%       adjust = zeros(size(adjust));
-%   end
+   if t_epoch < som.trainParam.epochs * 0.05
+       adjust = zeros(size(adjust));
+   end
   
   mean_adjusts = mean(mean(adjust));
   mean_O_h = mean(O_h);
