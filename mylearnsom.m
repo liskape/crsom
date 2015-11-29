@@ -116,46 +116,38 @@ end
 function [dw,ls, E, new_cn, mean_adjusts, mean_O_h, first_part, second_part, observed_delta_h, observed_koefs] = apply(w,p,z,n,a,t,e,gW,gA,d,lp,ls, cn, target, t_epoch, som, LR2, s_0, send)
 
   % Initial learning state
-  if isempty(ls)
-    ls.step = 0;
-    ls.nd_max = max(max(d));
-  end
+%   if isempty(ls)
+%     ls.step = 0;
+%     ls.nd_max = max(max(d));
+%   end
 
   % Neighborhood and learning rate
-  if (ls.step < lp.order_steps)
-    percent = 1 - ls.step/lp.order_steps;
-    nd = 1.00001 + (ls.nd_max-1) * percent;
-    lr = lp.tune_lr + (lp.order_lr-lp.tune_lr) * percent;
-  else
-    nd = lp.tune_nd + 0.00001;
-    lr = lp.tune_lr * lp.order_steps/ls.step;
-  end
+%   if (ls.step < lp.order_steps)
+%     percent = 1 - ls.step/lp.order_steps;
+%     nd = 1.00001 + (ls.nd_max-1) * percent;
+%     lr = lp.tune_lr + (lp.order_lr-lp.tune_lr) * percent;
+%   else
+%     nd = lp.tune_nd + 0.00001;
+%     lr = lp.tune_lr * lp.order_steps/ls.step;
+%   end
 
   % Bubble neighborhood
-  a2 = 0.5*(a + (d < nd)*a);
-
-  % Instar rule
-  [S,R] = size(w);
-  [R,Q] = size(p);
-  pt = p';
-  lr_a = lr * a2;
-  dw = zeros(S,R);
+%   a2 = 0.5*(a + (d < nd)*a);
+% 
+%   % Instar rule
+%   [S,R] = size(w);
+%   [R,Q] = size(p);
+%   pt = p';
+%   lr_a = lr * a2;
+%   dw = zeros(S,R);
 %   for q=1:Q
 %     dw = dw + lr_a(:,q+zeros(1,R)) .* (pt(q+zeros(S,1),:)-w);
 %   end
 
   % Next learning statedw
-  ls.step = ls.step + 1;
-  
-  if t_epoch == 1
-     tic 
-  end
+%   ls.step = ls.step + 1;
   
   [adjust, new_cn, E, O_h, first_part, second_part, observed_delta_h, observed_koefs] = context_net_adapt2( cn, som, p, target, find(a), t_epoch, som.trainParam.epochs, LR2, s_0, send );
-  
-  if t_epoch == 1
-     toc
-  end
   
 %    if t_epoch < som.trainParam.epochs * 0.05
 %        adjust = zeros(size(adjust));

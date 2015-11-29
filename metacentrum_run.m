@@ -1,15 +1,14 @@
 function metacentrum_run    
 % *************************************************************************
-% dataset-epochs-version-additional_info
-settings = 'dunno';
-net_name = regexprep(settings,'[^\w'']','-');
-todo =     'will see, what happens, divide clusters :( - check animate position formation';
-epochs = 1000;
+todo = 'compare with different settings';
+epochs = 1;
 normalize = true;
 LR2 = 0.05;
 s_0 = 200; 
 s_end = 0.01;
-
+settings = '';
+problem = 'train_iris2dim3CEasy';
+net_name = sprintf('%s_epochs=%d_normalize=%i_LR2=%.2f_s_0=%d_s_end=%.2f_%s', problem, epochs, normalize, LR2, s_0, s_end,settings);
 % -------------------------------------------------------------------------
   
     while 1
