@@ -14,11 +14,11 @@ function [ result ] = out( crsom, in, ta, i, j, find_min);
      end
         
    if find_min
-    result = find(b == min(b(j_class_map)));
+    nearest_j_class_points = find(b == min(b(j_class_map)));
+    result = find(crsom(nearest_j_class_points(1)));
    else
-    result = find(b == max(b(j_class_map)));
+    farthest_j_class_points = find(b == max(b(j_class_map)));
+    result = find(crsom(farthest_j_class_points(1)));
    end
-   
-   result = result(1);
 end
 

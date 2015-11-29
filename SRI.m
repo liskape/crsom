@@ -1,20 +1,22 @@
-function sri = SRI( crsom, in, ta )
+function [sri, I, O] = SRI( crsom, in, ta )
 
 N = length(in);
 M = length(unique(vec2ind(ta)));
 NEURONS = length(crsom.IW{1});
 N_SIDE = sqrt(NEURONS);
 
+
+% compute I --------------------------------------
 a = zeros(N, 1);
 
 for i = 1:N
     a(i) = SRI_example( crsom, in, ta, i);
 end
 
-I = sum(a) / (N * (M - 1));
+I = sum(a) / (N * (M - 1))
 
 
-
+% compute O -------------------------------------
 a = zeros(N, 1);
 
 for i = 1:N
@@ -25,12 +27,12 @@ for i = 1:N
     a(i) = norm(H - out( crsom, in, ta, i, C, false));
 end
 
-O = sum(a) / N;
+O = sum(a) / N
 
 
+% final result -----------------------------------
 
-
-sri =  O / I;
+sri =  O / I
 
 end
 

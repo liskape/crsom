@@ -113,7 +113,7 @@ function err = check_param(param)
   err = '';
 end
 
-function [dw,ls, E, new_cn, mean_adjusts, mean_O_h, first_part, second_part] = apply(w,p,z,n,a,t,e,gW,gA,d,lp,ls, cn, target, t_epoch, som, LR2, s_0, send)
+function [dw,ls, E, new_cn, mean_adjusts, mean_O_h, first_part, second_part, observed_delta_h, observed_koefs] = apply(w,p,z,n,a,t,e,gW,gA,d,lp,ls, cn, target, t_epoch, som, LR2, s_0, send)
 
   % Initial learning state
   if isempty(ls)
@@ -151,15 +151,15 @@ function [dw,ls, E, new_cn, mean_adjusts, mean_O_h, first_part, second_part] = a
      tic 
   end
   
-  [adjust, new_cn, E, O_h, first_part, second_part] = context_net_adapt2( cn, som, p, target, find(a), t_epoch, som.trainParam.epochs, LR2, s_0, send );
+  [adjust, new_cn, E, O_h, first_part, second_part, observed_delta_h, observed_koefs] = context_net_adapt2( cn, som, p, target, find(a), t_epoch, som.trainParam.epochs, LR2, s_0, send );
   
   if t_epoch == 1
      toc
   end
   
-   if t_epoch < som.trainParam.epochs * 0.05
-       adjust = zeros(size(adjust));
-   end
+%    if t_epoch < som.trainParam.epochs * 0.05
+%        adjust = zeros(size(adjust));
+%    end
   
   mean_adjusts = mean(mean(adjust));
   mean_O_h = mean(O_h);

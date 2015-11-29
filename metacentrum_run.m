@@ -4,10 +4,10 @@ function metacentrum_run
 settings = 'dunno';
 net_name = regexprep(settings,'[^\w'']','-');
 todo =     'will see, what happens, divide clusters :( - check animate position formation';
-epochs = 500;
-normalize = false;
-LR2 = 0.01;
-s_0 = 200;
+epochs = 1000;
+normalize = true;
+LR2 = 0.05;
+s_0 = 200; 
 s_end = 0.01;
 
 % -------------------------------------------------------------------------
@@ -19,7 +19,7 @@ s_end = 0.01;
         pause(5);
     end 
 
-    [crsom, in, ta, uc ] = train_iris2dim(epochs, net_name, normalize, LR2, s_0, s_end );
+    [crsom, in, ta, uc ] = train_iris2dim3CEasy(epochs, net_name, normalize, LR2, s_0, s_end );
     save(strcat(net_name,'.mat'));
 end
 

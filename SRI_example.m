@@ -16,8 +16,8 @@ for j = 1:M
     if j ~= C
         min_out = out( crsom, in, ta, i, j, true);
 
-        H_min = [col_inx(min_out, N_SIDE) row_idx(min_out, N_SIDE) ];
-        inner(j) = norm(H - H_min);
+        [r, c] = getCoord(min_out, N_SIDE);
+        inner(j) = norm(H - [r, c]);
     end
 end
 

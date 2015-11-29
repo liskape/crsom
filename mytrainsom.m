@@ -207,7 +207,7 @@ for epoch=0:param.epochs
                     fcn = fcns.inputWeights(i,j).learn;
                     if fcn.exist
                         Pd = nntraining.pd(net,1,divData.Pc,divData.Pd,i,j,ts);
-                        [dw,IWLS{i,j}, E, new_cn, mean_adjusts, mean_O_h, first_part, second_part] = fcn.apply(net.IW{i,j}, ...
+                        [dw,IWLS{i,j}, E, new_cn, mean_adjusts, mean_O_h, first_part, second_part, observed_delta_h, observed_koefs] = fcn.apply(net.IW{i,j}, ...
                             Pd,divData.Zi{i,j},divData.N{i},divData.Ac{i,ts+net.numLayerDelays},...
                             [divData.T{ii,ts}],[divData.E{ii,ts}],gIW{i,j,ts},...
                             gA{i,ts},net.layers{i}.distances,fcn.param,IWLS{i,j}, net.userdata.context_net, net.userdata.targets(:,qq), epoch + 1, net, net.userdata.lr2, net.userdata.s_0, net.userdata.s_end);
@@ -218,8 +218,8 @@ for epoch=0:param.epochs
                         net.userdata.mean_O_h = [net.userdata.mean_O_h mean_O_h];
                          net.userdata.first_part = [net.userdata.first_part first_part];
                         net.userdata.second_part = [net.userdata.second_part second_part];
-                        
-          
+                        net.userdata.observed_delta_h = [net.userdata.observed_delta_h observed_delta_h];
+                        net.userdata.observed_koefs = [net.userdata.observed_koefs observed_koefs];
                          net.IW{i,j} = net.IW{i,j} + dw;
                         
                     end
@@ -235,8 +235,8 @@ for epoch=0:param.epochs
             log_error(epoch, mean(e), net.userdata.net_name);
         end
         
-         % create ~ 8 snaps
-        if mod(epoch, ceil(net.trainParam.epochs / 8)) == 0
+         % create ~ 7 snaps
+        if mod(epoch, ceil(net.trainParam.epochs / 7)) == 0
             net.userdata.history_snaps = [net.userdata.history_snaps {net.IW{1}}];
         end        
         
