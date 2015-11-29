@@ -3,8 +3,8 @@ function metacentrum_run
 todo = 'compare with different settings';
 epochs = 1000;
 normalize = true;
-LR2 = 0.01;
-s_0 = 200; 
+LR2 = 0.1;
+s_0 = 100; 
 s_end = 0.01;
 settings = ''; 
 problem = 'train_iris2dim3CEasy';
