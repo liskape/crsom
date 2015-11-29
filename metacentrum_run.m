@@ -1,7 +1,7 @@
 function metacentrum_run    
 % *************************************************************************
 todo = 'compare with different settings';
-epochs = 1;
+epochs = 1000;
 normalize = true;
 LR2 = 0.05;
 s_0 = 200; 
