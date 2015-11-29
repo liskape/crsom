@@ -5,7 +5,7 @@ epochs = 1000;
 normalize = true;
 LR2 = 0.1;
 s_0 = 100; 
-s_end = 0.1;
+s_end = 0.9;
 settings = ''; 
 problem = 'train_iris2dim3CEasy';
 net_name = sprintf('%s_epochs=%d_normalize=%i_LR2=%.2f_s_0=%d_s_end=%.2f_%s', problem, epochs, normalize, LR2, s_0, s_end,settings);
