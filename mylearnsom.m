@@ -115,13 +115,19 @@ end
 
 function [dw,ls, E, new_cn, mean_adjusts, mean_O_h, first_part, second_part, observed_delta_h, observed_koefs] = apply(w,p,z,n,a,t,e,gW,gA,d,lp,ls, cn, target, t_epoch, som, LR2, s_0, send)
 
-  % Initial learning state
-%   if isempty(ls)
-%     ls.step = 0;
-%     ls.nd_max = max(max(d));
-%   end
-
-  % Neighborhood and learning rate
+%   Initial learning state
+  if isempty(ls)
+    ls.step = 0;
+    ls.nd_max = max(max(d));
+  end
+  
+    lp.order_steps = som.trainParam.epochs;
+  
+    percent = 1 - ls.step/lp.order_steps;
+    nd = 1.00001 + (ls.nd_max-1) * percent;
+    lr = 0.1;
+    
+%   Neighborhood and learning rate
 %   if (ls.step < lp.order_steps)
 %     percent = 1 - ls.step/lp.order_steps;
 %     nd = 1.00001 + (ls.nd_max-1) * percent;
@@ -131,31 +137,32 @@ function [dw,ls, E, new_cn, mean_adjusts, mean_O_h, first_part, second_part, obs
 %     lr = lp.tune_lr * lp.order_steps/ls.step;
 %   end
 
-  % Bubble neighborhood
-%   a2 = 0.5*(a + (d < nd)*a);
-% 
-%   % Instar rule
-%   [S,R] = size(w);
-%   [R,Q] = size(p);
-%   pt = p';
-%   lr_a = lr * a2;
-%   dw = zeros(S,R);
-%   for q=1:Q
-%     dw = dw + lr_a(:,q+zeros(1,R)) .* (pt(q+zeros(S,1),:)-w);
-%   end
+%   Bubble neighborhood
+  a2 = 0.5*(a + (d < nd)*a);
 
-  % Next learning statedw
-%   ls.step = ls.step + 1;
+  % Instar rule
+  [S,R] = size(w);
+  [R,Q] = size(p);
+  pt = p';
+  lr_a = lr * a2; % a2 is sigma (neighb restriction)
+  dw = zeros(S,R);
+  for q=1:Q
+    [delta_h, new_cn, E, O_h, s, sigma_neig] = context_net_adapt3( cn, som, p, target, a2 );
+    k = lr_a.*delta_h;
+    dw = dw + k(:,q+zeros(1,R)) .* (pt(q+zeros(S,1),:)-w);
+  end
+
+%   Next learning statedw
+  ls.step = t_epoch;
   
-  [adjust, new_cn, E, O_h, first_part, second_part, observed_delta_h, observed_koefs] = context_net_adapt2( cn, som, p, target, find(a), t_epoch, som.trainParam.epochs, LR2, s_0, send );
+%   [adjust, new_cn, E, O_h, first_part, second_part, observed_delta_h, observed_koefs] = context_net_adapt2( cn, som, p, target, find(a), t_epoch, som.trainParam.epochs, LR2, s_0, send );
   
 %    if t_epoch < som.trainParam.epochs * 0.05
 %        adjust = zeros(size(adjust));
 %    end
   
-  mean_adjusts = mean(mean(adjust));
+  mean_adjusts = mean(mean(dw));
   mean_O_h = mean(O_h);
-  first_part = mean(first_part);
-  second_part = mean(second_part);
-  dw = adjust;
+  first_part = mean(s);
+  second_part = mean(sigma_neig);
 end
