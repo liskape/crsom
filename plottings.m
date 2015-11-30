@@ -40,7 +40,6 @@ function [ output_args ] = plottings( crsom, uc, inputs, targets )
      
     figure(6);
     plotsompos(som, inputs);
-    
     SRI(crsom, inputs, targets);
 end
 

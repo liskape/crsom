@@ -1,5 +1,5 @@
 function [adjustments, new_cn, E, O_h, s, sigma_neig, observed_delta_h, observed_koefs] = context_net_adapt2( cn, som, input, target, win, t, t_end, LR2, s_0, s_end )
-    OBSERVED_NEURON = 91;
+    OBSERVED_NEURON = 1;
    [NEURONS, input_size] = size(som.IW{1});
    OUTPUTS = length(target);
    
