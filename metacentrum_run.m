@@ -1,13 +1,13 @@
 function metacentrum_run    
 % *************************************************************************
 todo = 'compare with different settings';
-epochs = 1000;
+epochs = 100;
 normalize = false;
 LR2 = 0.1;
-s_0 = 10; 
-s_end = 0.5;
+s_0 = 200; 
+s_end = 0.01;
 settings = 'random_weights'; 
-problem = 'train_iris2dim3CEasy';
+problem = 'f_train_iris';
 net_name = sprintf('%s_epochs=%d_normalize=%i_LR2=%.2f_s_0=%d_s_end=%.2f_%s', problem, epochs, normalize, LR2, s_0, s_end,settings);
 % net_name = 'dunno'
 % -------------------------------------------------------------------------
@@ -19,7 +19,7 @@ net_name = sprintf('%s_epochs=%d_normalize=%i_LR2=%.2f_s_0=%d_s_end=%.2f_%s', pr
         pause(5);
     end 
 
-    [crsom, in, ta, uc ] = train_iris2dim3CEasy(epochs, net_name, normalize, LR2, s_0, s_end );
+    [crsom, in, ta, uc ] = train_iris(epochs, net_name, normalize, LR2, s_0, s_end );
     save(strcat(net_name,'.mat'));
     
 %     delete this shit
