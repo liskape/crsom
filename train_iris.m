@@ -2,8 +2,9 @@ function [ crsom, inputs, targets, untrained, lr2 ] = train_iris( epochs, net_na
     load iris_dataset
     
     if normalized
-        inputs = mapminmaxT(irisInputs');
-        inputs = inputs'
+%         inputs = mapminmaxT(irisInputs');
+%         inputs = inputs'
+        inputs = mapstd(irisInputs);
     else
         inputs = irisInputs
     end
