@@ -1,6 +1,6 @@
 function metacentrum_run    
 % *************************************************************************
-todo = 'compare with different settings';
+todo = 'look at HARTONO, look at animate';
 epochs = 30000;
 normalize = false;
 LR2 = 0.01;
