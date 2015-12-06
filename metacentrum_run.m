@@ -3,7 +3,7 @@ function metacentrum_run
 todo = 'look at HARTONO, look at animate';
 epochs = 30000;
 normalize = false;
-LR2 = 0.01;
+LR2 = 0.1;
 s_0 = 200; 
 s_end = 0.01;
 settings = 'random_weights'; 
