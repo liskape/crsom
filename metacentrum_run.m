@@ -3,7 +3,7 @@ function metacentrum_run
 todo = 'compare with different settings';
 epochs = 1000;
 normalize = true;
-LR2 = 1.5;
+LR2 = 3;
 s_0 = 200; 
 s_end = 0.01;
 settings = 'random_weights_mapstd_normalization'; 
