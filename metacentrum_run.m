@@ -1,12 +1,12 @@
 function metacentrum_run    
 % *************************************************************************
 todo = 'compare with different settings';
-epochs = 1000;
-normalize = true;
-LR2 = 3;
+epochs = 30000;
+normalize = false;
+LR2 = 0.01;
 s_0 = 200; 
 s_end = 0.01;
-settings = 'random_weights_mapstd_normalization'; 
+settings = 'random_weights'; 
 problem = 'f_train_iris';
 net_name = sprintf('%s_epochs=%d_normalize=%i_LR2=%.2f_s_0=%d_s_end=%.2f_%s', problem, epochs, normalize, LR2, s_0, s_end,settings);
 % net_name = 'dunno'
