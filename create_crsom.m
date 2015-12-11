@@ -1,8 +1,8 @@
-function [ som ] = create_crsom(inputs, targets, LR2, s_0, s_end)
+function [ som ] = create_crsom(inputs, targets, LR2, s_0, s_end, map_size)
     [r_in c_in] = size(inputs);
     [r_tar c_tar] = size(targets);
 
-    nodes_size = floor(sqrt(c_in));
+    nodes_size = floor(sqrt(c_in * map_size));
 
     som = selforgmap([nodes_size nodes_size],10, 3, 'gridtop', 'dist');
     som.trainFcn = 'mytrainsom';
