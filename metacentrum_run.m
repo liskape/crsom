@@ -1,9 +1,9 @@
 function metacentrum_run    
 % *************************************************************************
-todo = 'compare with bigger LR (animate)';
-epochs = 1000;
+todo = 'compare with LR=.25, 1000e';
+epochs = 2000;
 normalize = 2; % 0 = do not normalize, 1 = minmax, 2 = mapstd  
-LR2 = 0.1;
+LR2 = 0.25;
 s_0 = 200;
 s_end = 0.01;
 settings = 'random_weights_mapstd'; 
