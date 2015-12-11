@@ -1,18 +1,18 @@
 function metacentrum_run    
 % *************************************************************************
-todo = 'compare with 1000 epochs & LR & mapsize';
-epochs = 2000;
-normalize = true;
-LR2 = 0.25;
+todo = 'compare with bigger LR (animate)';
+epochs = 1000;
+normalize = 2; % 0 = do not normalize, 1 = minmax, 2 = mapstd  
+LR2 = 0.1;
 s_0 = 200;
 s_end = 0.01;
-settings = 'random_weights'; 
+settings = 'random_weights_mapstd'; 
 problem = 'f_train_iris';
-map_size = 0.75;
+map_size = 1;
 net_name = sprintf('%s_epochs=%d_normalize=%i_mapsize=%.2f_LR2=%.2f_s_0=%d_s_end=%.2f_%s', problem, epochs, normalize,map_size, LR2, s_0, s_end,settings);
 % net_name = 'dunno'
 % -------------------------------------------------------------------------
-  
+
     while 1
         [tf msg] = license('checkout','Neural_Network_Toolbox');
         if tf==1, break, end
