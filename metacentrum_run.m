@@ -1,14 +1,14 @@
 function metacentrum_run    
 % *************************************************************************
-todo = 'compare with 1000 epochs';
+todo = 'compare with 1000 epochs & LR & mapsize';
 epochs = 2000;
 normalize = true;
-LR2 = 0.18;
-s_0 = 200; 
+LR2 = 0.25;
+s_0 = 200;
 s_end = 0.01;
 settings = 'random_weights'; 
 problem = 'f_train_iris';
-map_size = 1;
+map_size = 0.75;
 net_name = sprintf('%s_epochs=%d_normalize=%i_mapsize=%.2f_LR2=%.2f_s_0=%d_s_end=%.2f_%s', problem, epochs, normalize,map_size, LR2, s_0, s_end,settings);
 % net_name = 'dunno'
 % -------------------------------------------------------------------------
