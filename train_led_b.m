@@ -3,13 +3,16 @@ function [ crsom, inputs, targets, untrained, lr2 ] = train_led_b( epochs, net_n
     in = importdata('lz-b-1-in.csv')
     in = in.data'
     
-    if normalized
-        inputs = mapminmaxT(in);
-        inputs = inputs';
+%     extract
+    if normalized == 1
+        inputs = mapminmaxT(in');
+        inputs = inputs'
+    elseif normalized == 2
+        inputs = mapstd(in);
     else
-        inputs = in;
+        inputs = in
     end
-  
+      
     targets = importdata('lz-b-1-ta')'  
     crsom = create_crsom(inputs, targets, LR2, s0, s_end, map_size);
     
