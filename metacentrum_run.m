@@ -3,7 +3,7 @@ function metacentrum_run
 todo = 'compare with other led_b_*';
 epochs = 200;
 normalize = 2; % 0 = do not normalize, 1 = minmax, 2 = mapstd  
-LR2 = 0.25;
+LR2 = 1;
 s_0 = 200;
 s_end = 0.01;
 settings = 'random_weights'; 
