@@ -1,7 +1,7 @@
 function metacentrum_run    
 % *************************************************************************
 todo = 'compare with other led_b_*';
-epochs = 50;
+epochs = 200;
 normalize = 2; % 0 = do not normalize, 1 = minmax, 2 = mapstd  
 LR2 = 2;
 s_0 = 200;
