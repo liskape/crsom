@@ -8,7 +8,7 @@ s_0 = 200;
 s_end = 0.01;
 settings = 'random_weights(not powered distance)'; 
 problem = 'lz-b';
-map_size = 0.7;
+map_size = 1;
 net_name = sprintf('%s_epochs=%d_normalize=%i_mapsize=%.2f_LR2=%.2f_s_0=%d_s_end=%.2f_%s', problem, epochs, normalize,map_size, LR2, s_0, s_end,settings);
 % net_name = 'dunno'
 % -------------------------------------------------------------------------
