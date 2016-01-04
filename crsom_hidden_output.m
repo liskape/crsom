@@ -10,7 +10,7 @@ function [result, neighborhood_restiction, I, s] = crsom_hidden_output(map, inpu
     I = zeros(neurons, 1);
     
     for i=1:neurons
-        I(i) = power(norm(d(i,:)),2);
+        I(i) = norm(d(i,:));
     end
     
     s = exp(-I);
