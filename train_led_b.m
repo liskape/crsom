@@ -8,7 +8,7 @@ function [ crsom, inputs, targets, untrained, lr2 ] = train_led_b( epochs, net_n
         inputs = mapminmaxT(in');
         inputs = inputs'
     elseif normalized == 2
-        inputs = mapstd(in);
+        inputs = mapstd(in')';
     else
         inputs = in
     end
