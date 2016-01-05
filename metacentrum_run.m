@@ -3,7 +3,7 @@ function metacentrum_run
 todo = 'compare with other katy_soad*';
 epochs = 500;
 normalize = 1; % 0 = do not normalize, 1 = minmax, 2 = mapstd  
-LR2 = 0.5;
+LR2 = 0.1;
 s_0 = 200;
 s_end = 0.01;
 settings = 'random_weights'; 
