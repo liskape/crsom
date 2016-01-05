@@ -1,7 +1,7 @@
 function metacentrum_run    
 % *************************************************************************
 todo = 'compare with other katy_soad*';
-epochs = 300;
+epochs = 500;
 normalize = 1; % 0 = do not normalize, 1 = minmax, 2 = mapstd  
 LR2 = 0.5;
 s_0 = 200;
