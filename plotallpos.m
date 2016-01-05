@@ -1,9 +1,12 @@
 function [ output_args ] = plotallpos( crsom, in, tar )
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
+MAX = 5
 
     [dims, examples] = size(in);
     a = nchoosek(1:dims, 2);
+    a = datasample(a, MAX);
+    
     
     original = crsom.IW{1};
     original_inputs = in;

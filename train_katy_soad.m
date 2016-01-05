@@ -1,13 +1,17 @@
 function [ crsom, inputs, targets, untrained, lr2 ] = train_katy_soad( epochs, net_name, normalized, LR2, s0, s_end, map_size)
   
-    in = importdata('katy-soad-1-in.csv')
+    in = importdata('katy-soad-1-in.csv');
     
     if normalized == 1
-        inputs = mapminmaxT(in');
+        inputs = mapminmax(in');
     elseif normalized == 2
         inputs = mapstd(in');
-    else
+    elseif normalized == 0
         inputs = in
+    elseif normalized == 3
+        inputs = mapminmax(in', 0);
+    elseif normalized == 4
+        inputs = mapminmax(in', 0, 0.5);
     end
       
     targets = importdata('katy-soad-1-ta')'  
