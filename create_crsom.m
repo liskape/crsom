@@ -14,10 +14,10 @@ function [ som ] = create_crsom(inputs, targets, LR2, s_0, s_end, map_size)
 %     som = configure(som, rand(size(inputs)));
 %     som.iw{1} = rand(size(som.IW{1}));
 
-    % pretrain------------------------------
-    % pre = selforgmap([10 10],10, 3, 'gridtop', 'dist');
-    % pre = train(pre, irisInputs);
-    % som.IW{1} = pre.IW{1};
-    % ------------------------------------
+%     pretrain------------------------------
+    pre = selforgmap([nodes_size nodes_size],10, 3, 'gridtop', 'dist');
+    pre = train(pre, inputs);
+    som.IW{1} = pre.IW{1};
+%     ------------------------------------
 end
 

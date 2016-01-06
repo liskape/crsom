@@ -1,15 +1,15 @@
 function metacentrum_run    
 % *************************************************************************
-todo = 'compare with other katy_soad*';
-epochs = 2000;
-normalize = 4; % 0 = do not normalize, 1 = minmax, 2 = mapstd, 3 = minmax 0-1, 4 = minmax 0-0,5
+todo = 'should have nic results';
+epochs = 1000;
+normalize = 1; % 0 = do not normalize, 1 = minmax, 2 = mapstd, 3 = minmax 0-1, 4 = minmax 0-0,5
 LR2 = 0.1;
 s_0 = 200;
 s_end = 0.01;
-settings = 'random_weights'; 
-problem = 'katy_soad';
+settings = 'som_init'; 
+problem = 'iris';
 map_size = 1;
-net_name = sprintf('%s_epochs=%d_normalize=%i_mapsize=%.2f_LR2=%.2f_s_0=%d_s_end=%.2f_%s', problem, epochs, normalize,map_size, LR2, s_0, s_end,settings);
+net_name = sprintf('%s_epochs=%d_normalize=%i_mapsize=%.2f_LR2=%.2f_%s', problem, epochs, normalize,map_size, LR2,settings);
 % net_name = 'dunno'
 % -------------------------------------------------------------------------
 
@@ -20,7 +20,7 @@ net_name = sprintf('%s_epochs=%d_normalize=%i_mapsize=%.2f_LR2=%.2f_s_0=%d_s_end
         pause(5);
     end 
 
-    [crsom, in, ta, uc ] = train_katy_soad(epochs, net_name, normalize, LR2, s_0, s_end, map_size );
+    [crsom, in, ta, uc ] = train_iris(epochs, net_name, normalize, LR2, s_0, s_end, map_size );
     save(strcat(net_name,'.mat'));
     
 %     delete this shit
