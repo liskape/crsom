@@ -9,7 +9,7 @@ s_end = 0.01;
 settings = 'som_init'; 
 problem = 'iris';
 map_size = 1;
-net_name = sprintf('%s_epochs=%d_normalize=%i_mapsize=%.2f_LR2=%.2f_%s', problem, epochs, normalize,map_size, LR2,settings);
+net_name = sprintf('%s_ep=%d_norm=%i_size=%.2f_LR2=%.2f_%s', problem, epochs, normalize,map_size, LR2,settings);
 % net_name = 'dunno'
 % -------------------------------------------------------------------------
 
