@@ -1,7 +1,7 @@
 function metacentrum_run    
 % *************************************************************************
 todo = 'more epochs';
-epochs = 2000;
+epochs = 5000;
 normalize = 1; % 0 = do not normalize, 1 = minmax, 2 = mapstd, 3 = minmax 0-1, 4 = minmax 0-0,5
 LR2 = 0.1;
 s_0 = 200;
