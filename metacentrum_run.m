@@ -1,7 +1,7 @@
 function metacentrum_run    
 % *************************************************************************
-todo = 'even smaller learning rate';
-epochs = 1000;
+todo = 'even smaller learning rate with more epochs';
+epochs = 2000;
 normalize = 1; % 0 = do not normalize, 1 = minmax, 2 = mapstd, 3 = minmax 0-1, 4 = minmax 0-0,5
 LR2 = 0.01;
 s_0 = 200;

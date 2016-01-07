@@ -1,7 +1,7 @@
-function [ colors ] = colorize( classVector )
+function [ colors ] = colorize( classVector, classes_count )
     [w, d] = size(classVector)
     colors = ones(d, 3)
-    miss_class = max(classVector);
+    miss_class = classes_count + 1;
     
     colors = replaceColor(colors,classVector, miss_class, [0 0 0]);
     colors = replaceColor(colors,classVector, 1, [0 0 1]);

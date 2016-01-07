@@ -42,7 +42,7 @@ unique_to_plot = unique([a(1,:); evaluation_with_misses]', 'rows');
 
 x = unique(a(1,:)');
 sizes = [x,histc(a(1,:)',x)];
-colors = colorize(unique_to_plot(:,2));
+colors = colorize(unique_to_plot(:,2), max(targets));
 s = scatter(row_idx(unique_to_plot(:,1),N), col_inx(unique_to_plot(:,1), N),sizes(:,2)*100, colors,'filled');
 
 unique_to_plot;
