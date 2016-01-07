@@ -1,7 +1,7 @@
 function metacentrum_run    
 % *************************************************************************
 todo = 'reduced dimensionality';
-epochs = 1000;
+epochs = 1500;
 normalize = 1; % 0 = do not normalize, 1 = minmax, 2 = mapstd, 3 = minmax 0-1, 4 = minmax 0-0,5
 LR2 = 0.05;
 s_0 = 200;
