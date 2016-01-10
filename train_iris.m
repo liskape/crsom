@@ -6,6 +6,8 @@ function [ crsom, inputs, targets, untrained, lr2 ] = train_iris( epochs, net_na
         inputs = inputs'
     elseif normalized == 2
         inputs = mapstd(irisInputs);
+    elseif normalized == 4
+        inputs = mapminmax(irisInputs, 0, 0.5);
     else
         inputs = irisInputs
     end
