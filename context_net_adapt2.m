@@ -8,6 +8,7 @@ function [adjustments, new_cn, E, O_h, s, sigma_neig, observed_delta_h, observed
 
    E = tr.perf;
    
+   
    delta_k = (Y - target).* Y.* (1 - Y);
    
    first_part = -s;
