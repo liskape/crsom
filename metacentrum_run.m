@@ -10,7 +10,7 @@ settings = '';
 problem = 'hits';
 map_size = 1;
 net_name = sprintf('%s_ep=%d_norm=%i_size=%.2f_LR2=%.2f_%s', problem, epochs, normalize,map_size, LR2,settings);
-net_name = 'dunno'
+% net_name = 'dunno'
 % -------------------------------------------------------------------------
 
     while 1
