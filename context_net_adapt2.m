@@ -16,7 +16,8 @@ function [adjustments, new_cn, E, O_h, s, sigma_neig, observed_delta_h, observed
    sumation = sum((delta_ks.*(cn.IW{1}'))')';
    delta_h = first_part .* sumation;
 
-%    delta_h = 1;
+%    REMOVE THIS
+   delta_h = 1;
    
    koefs = sigma_neig.*delta_h .* LR2;
     
