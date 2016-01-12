@@ -2,7 +2,7 @@ function metacentrum_run
 % *************************************************************************
 todo = 'smaller map';
 epochs = 1000;
-normalize = 4; % 0 = do not normalize, 1 = minmax, 2 = mapstd, 3 = minmax 0-1, 4 = minmax 0-0,5
+normalize = 3; % 0 = do not normalize, 1 = minmax, 2 = mapstd, 3 = minmax 0-1, 4 = minmax 0-0,5
 LR2 = 0.1;
 s_0 = 200;
 s_end = 0.01;
