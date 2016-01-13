@@ -11,14 +11,11 @@
 # NORMALIZE="3 4"
 # MAP_SIZE="1"
 
-PROBLEMS="katy-soad-2"
+PROBLEMS="off-sexp"
 LEARNING_RATES="0.03"
 EPOCHS="1"
 NORMALIZE="4"
 MAP_SIZE="1"
-
-cd /storage/brno2/home/$USER/matlab/
-module add matlab
 
 for p in `echo $PROBLEMS`
 do
@@ -36,7 +33,7 @@ do
           export n
           export ms
 
-          qsub -v p lr e n ms -N "job-$p$lr-$e-$n-$ms" mjob-one.sh
+          qsub -v p,lr,e,n,ms -N "job-p:$p-lr:$lr-e:$e-n:$n-ms:$ms" mjob-one.sh
        done
       done
     done
