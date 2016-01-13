@@ -9,7 +9,7 @@ s_end = 0.01;
 settings = '';
 problem = 'off-sexp';
 map_size = 1;
-net_name = net_name(problem, epochs, normalize, map_size, LR2, settings);
+net_name = create_net_name(problem, epochs, normalize, map_size, LR2, settings);
 % net_name = 'dunno3'
 % -------------------------------------------------------------------------
 

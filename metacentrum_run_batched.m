@@ -6,7 +6,7 @@ LR2 = lr;
 settings = '';
 problem = p;
 map_size = ms;
-net_name = net_name(problem, epochs, normalize, map_size, LR2, settings);
+net_name = create_net_name(problem, epochs, normalize, map_size, LR2, settings);
 % -------------------------------------------------------------------------
 
     while 1
