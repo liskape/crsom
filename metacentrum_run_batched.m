@@ -6,7 +6,7 @@ LR2 = lr;
 settings = '';
 problem = p;
 map_size = ms;
-net_name = sprintf('%s_ep=%d_norm=%i_size=%.2f_LR2=%.2f_%s', problem, epochs, normalize, map_size, LR2, settings);
+net_name = net_name(problem, epochs, normalize, map_size, LR2, settings);
 % -------------------------------------------------------------------------
 
     while 1
