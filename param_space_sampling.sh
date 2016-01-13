@@ -5,7 +5,7 @@
 #PBS -m e
 #PBS -l nodes=1#excl
 
-PROBLEMS="katy-soad-2"
+PROBLEMS="off-sexp"
 LEARNING_RATES="0.03 0.1 0.3"
 EPOCHS="300 1000 3000"
 NORMALIZE="3 4"
@@ -27,7 +27,7 @@ do
           export n
           export ms
 
-          qsub -v p,lr,e,n,ms -N "job-p:$p-lr:$lr-e:$e-n:$n-ms:$ms" mjob-one.sh
+          qsub -v p,lr,e,n,ms -N "p:$p_lr:$lr_e:$e_n:$n_ms:$ms" mjob-one.sh
        done
       done
     done
