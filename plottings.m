@@ -38,8 +38,8 @@ function [ output_args ] = plottings( crsom, uc, inputs, targets )
 %      animate_position_formation(crsom, inputs);
 %      title(crsom.userdata.net_name);
      
-    figure(6);
-    plotsompos(som, inputs);
+%     figure(6);
+%     plotsompos(som, inputs);
 %     SRI(crsom, inputs, targets);
 end
 

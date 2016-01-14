@@ -5,11 +5,11 @@
 #PBS -m e
 #PBS -l nodes=1#excl
 
-PROBLEMS="off-sexp"
-LEARNING_RATES="1"
-EPOCHS="1"
-NORMALIZE="3"
-MAP_SIZE="0.5"
+PROBLEMS="off-sexp katy-soad-2"
+LEARNING_RATES="0.01 0.05 0.1"
+EPOCHS="1 500 1500 5000"
+NORMALIZE="3 4"
+MAP_SIZE="1"
 
 for p in `echo $PROBLEMS`
 do

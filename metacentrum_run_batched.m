@@ -20,7 +20,7 @@ net_name = create_net_name(problem, epochs, normalize, map_size, LR2, settings);
     save(strcat(net_name,'.mat'));
     
     my_plot_som(crsom, in, ta);
-    title(netname);
+    title(net_name);
     print(strcat(net_name,'.png'), '-dpng');
 end
 
