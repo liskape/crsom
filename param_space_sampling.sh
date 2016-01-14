@@ -6,8 +6,8 @@
 #PBS -l nodes=1#excl
 
 PROBLEMS="off-sexp"
-LEARNING_RATES="10"
-EPOCHS="10"
+LEARNING_RATES="1"
+EPOCHS="1"
 NORMALIZE="1"
 MAP_SIZE="0.5"
 
