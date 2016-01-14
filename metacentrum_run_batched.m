@@ -19,10 +19,7 @@ net_name = create_net_name(problem, epochs, normalize, map_size, LR2, settings);
     [crsom, in, ta, uc ] = train_problem(problem, epochs, net_name, normalize, LR2, 200, 0.01, map_size );
     save(strcat(net_name,'.mat'));
     
-    
-    f = figure('visible','off');
     my_plot_som(crsom, in, ta);
-    saveas(f,'newout','fig')
-    print(net_name,'-dpng');
+    print(strcat(net_name,'.png'), '-dpng');
 end
 

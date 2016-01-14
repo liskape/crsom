@@ -8,7 +8,7 @@
 PROBLEMS="off-sexp"
 LEARNING_RATES="1"
 EPOCHS="1"
-NORMALIZE="1"
+NORMALIZE="3"
 MAP_SIZE="0.5"
 
 for p in `echo $PROBLEMS`
