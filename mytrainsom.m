@@ -214,10 +214,10 @@ for epoch=0:param.epochs
              
                         e = [e E];
                         net.userdata.context_net = new_cn;
-                        net.userdata.mean_adjusts = [net.userdata.mean_adjusts mean_adjusts];
-                        net.userdata.mean_O_h = [net.userdata.mean_O_h mean_O_h];
-                         net.userdata.first_part = [net.userdata.first_part first_part];
-                        net.userdata.second_part = [net.userdata.second_part second_part];
+%                         net.userdata.mean_adjusts = [net.userdata.mean_adjusts mean_adjusts];
+%                         net.userdata.mean_O_h = [net.userdata.mean_O_h mean_O_h];
+%                          net.userdata.first_part = [net.userdata.first_part first_part];
+%                         net.userdata.second_part = [net.userdata.second_part second_part];
 %                         net.userdata.observed_delta_h = [net.userdata.observed_delta_h observed_delta_h];
 %                         net.userdata.observed_koefs = [net.userdata.observed_koefs observed_koefs];
                          net.IW{i,j} = net.IW{i,j} + dw;

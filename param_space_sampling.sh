@@ -5,10 +5,10 @@
 #PBS -m e
 #PBS -l nodes=1#excl
 
-PROBLEMS="off-sexp katy-soad-2"
-LEARNING_RATES="0.01 0.05 0.1"
-EPOCHS="1 500 1500 5000"
-NORMALIZE="3 4"
+PROBLEMS="eminem-chemb-ram"
+LEARNING_RATES="0.01 0.05 0.1 0.2"
+EPOCHS="1 500 1000 2000 5000"
+NORMALIZE="1 3 4"
 MAP_SIZE="1"
 
 for p in `echo $PROBLEMS`
@@ -27,7 +27,7 @@ do
           export n
           export ms
 
-          qsub -v p,lr,e,n,ms -N "p:$p_lr:$lr_e:$e_n:$n_ms:$ms" mjob-one.sh
+          qsub -v p,lr,e,n,ms -N "$p|lr~$lr|e~$e|n~$n|ms~$ms" mjob-one.sh
        done
       done
     done
