@@ -5,9 +5,9 @@
 #PBS -m e
 #PBS -l nodes=1#excl
 
-PROBLEMS="eminem-chemb-ram"
+PROBLEMS="user_4e11f"
 LEARNING_RATES="0.01 0.05 0.1 0.2"
-EPOCHS="1 500 1000 2000 5000"
+EPOCHS="1 200 500 1000"
 NORMALIZE="1 3 4"
 MAP_SIZE="1"
 
@@ -27,7 +27,7 @@ do
           export n
           export ms
 
-          qsub -v p,lr,e,n,ms -N "$p|lr~$lr|e~$e|n~$n|ms~$ms" mjob-one.sh
+          qsub -v p,lr,e,n,ms -N "$p-lr$lr-e$e-n$n-ms$ms" mjob-one.sh
        done
       done
     done
