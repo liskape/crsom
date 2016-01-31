@@ -5,7 +5,7 @@
 #PBS -m e
 #PBS -l nodes=1#excl
 
-PROBLEMS="user_4e11f"
+PROBLEMS="katy-ram"
 LEARNING_RATES="0.01 0.05 0.1 0.2"
 EPOCHS="1 200 500 1000"
 NORMALIZE="1 3 4"
