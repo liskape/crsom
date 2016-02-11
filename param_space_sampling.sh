@@ -5,7 +5,7 @@
 #PBS -m e
 #PBS -l nodes=1#excl
 
-PROBLEMS="mj_elvis_pf met_mad_la am_kp_acdc db_stones_acdc"
+PROBLEMS="la_random_1 la_random_2 la_random_3 la_random_4 la_random_5"
 LEARNING_RATES="0.01 0.05 0.1 0.2"
 EPOCHS="500 1000 2000"
 NORMALIZE="1 3 4"
