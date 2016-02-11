@@ -5,7 +5,7 @@
 #PBS -m e
 #PBS -l nodes=1#excl
 
-PROBLEMS="la_random_1 la_random_2 la_random_3 la_random_4 la_random_5"
+PROBLEMS="met_mad_la_random1 met_mad_la_random2 met_mad_la_random3"
 LEARNING_RATES="0.01 0.05 0.1 0.2"
 EPOCHS="500 1000 2000"
 NORMALIZE="1 3 4"
