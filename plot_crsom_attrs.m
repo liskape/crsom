@@ -1,31 +1,31 @@
 function [ output_args ] = plot_crsom_attrs( crsom )
     
-subplot(7, 1, 1);
+subplot(5, 1, 1);
 plot(crsom.userdata.mean_adjusts);
 title('mean adjustments');
 
-subplot(7,1, 2);
+subplot(5,1, 2);
 plot(crsom.userdata.mean_O_h);
 title('mean O_h');
 
-subplot(7, 1, 3);
+subplot(5, 1, 3);
 plot(crsom.userdata.errors);
 title('mean error');
 
-subplot(7, 1, 4);
+subplot(5, 1, 4);
 plot(crsom.userdata.first_part);
 title('mean first part (e^(I_h))');
 
-subplot(7, 1, 5);
+subplot(5, 1, 5);
 plot(crsom.userdata.second_part);
 title('mean second part (sigma)');
 
-subplot(7, 1, 6);
-plot(crsom.userdata.observed_delta_h);
-title('observed delta_h');
-
-subplot(7, 1, 7);
-plot(crsom.userdata.observed_koefs);
-title('observed kofs');
+% subplot(7, 1, 6);
+% plot(crsom.userdata.observed_delta_h);
+% title('observed delta_h');
+% 
+% subplot(7, 1, 7);
+% plot(crsom.userdata.observed_koefs);
+% title('observed kofs');
 end
 

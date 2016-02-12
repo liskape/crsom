@@ -1,3 +1,4 @@
+
 function [ som ] = create_crsom(inputs, targets, LR2, s_0, s_end, map_size)
     [r_in c_in] = size(inputs);
     [r_tar c_tar] = size(targets);
