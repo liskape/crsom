@@ -5,9 +5,9 @@
 #PBS -m e
 #PBS -l nodes=1#excl
 
-PROBLEMS="arctic_monkeys_albs arctic_monkeys_albs_random1 arctic_monkeys_albs_random2 arctic_monkeys_albs_random3"
+PROBLEMS="met_mad_la"
 LEARNING_RATES="0.01 0.05 0.1 0.2"
-EPOCHS="500 1000"
+EPOCHS="500 1000 1500"
 NORMALIZE="1 3 4"
 MAP_SIZE="1"
 
