@@ -16,7 +16,7 @@ function [ crsom, inputs, targets, untrained, lr2 ] = train_problem(problem, epo
     end
       
     targets = importdata(strcat(problem, '-ta'))'
-        
+    crsom = create_crsom(inputs, targets, LR2, s0, s_end, map_size);
     crsom.trainParam.epochs = epochs;
     crsom.userdata.net_name = net_name;
     untrained = crsom;
