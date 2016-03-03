@@ -9,16 +9,16 @@ function [ colors ] = colorize( classVector, classes_count )
         colors = replaceColor(colors,classVector, miss_class, [0 0 0]);
     end
     
-    
     % blue
     colors = replaceColor(colors,classVector, 1, [0 0 1]); 
     
     % red
     colors = replaceColor(colors,classVector, 2, [1 0 0]);
     
-    % green
+
     if classes_count > 2
-        colors = replaceColor(colors,classVector, 3, [1 0 0]);
+        % green
+        colors = replaceColor(colors,classVector, 3, [0 1 0]);
     end
     
     

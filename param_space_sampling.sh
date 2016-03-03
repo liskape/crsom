@@ -6,9 +6,9 @@
 #PBS -l nodes=1#excl
 
 PROBLEMS="met_mad_la"
-LEARNING_RATES="0.01"
-EPOCHS="1"
-NORMALIZE="1"
+LEARNING_RATES="0.01 0.1"
+EPOCHS="500 1000"
+NORMALIZE="1 3 4"
 MAP_SIZE="1"
 
 for p in `echo $PROBLEMS`
