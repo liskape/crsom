@@ -5,8 +5,8 @@
 #PBS -m e
 #PBS -l nodes=1#excl
 
-PROBLEMS="met_mad_la"
-LEARNING_RATES="0.01 0.1"
+PROBLEMS="mj-elvis-pf am-kp-acdc eminem-chb-ram db_stones_acdc "
+LEARNING_RATES="0.01 0.1 0.05"
 EPOCHS="500 1000"
 NORMALIZE="1 3 4"
 MAP_SIZE="1"
