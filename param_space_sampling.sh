@@ -5,10 +5,10 @@
 #PBS -m e
 #PBS -l nodes=1#excl
 
-PROBLEMS="mj-elvis-pf am-kp-acdc eminem-chb-ram db_stones_acdc "
-LEARNING_RATES="0.01 0.1 0.05"
-EPOCHS="500 1000"
-NORMALIZE="1 3 4"
+PROBLEMS="met_mad_la"
+LEARNING_RATES="0.1"
+EPOCHS="500"
+NORMALIZE="4"
 MAP_SIZE="1"
 
 for p in `echo $PROBLEMS`
