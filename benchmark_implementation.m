@@ -28,7 +28,7 @@ function benchmark_implementation(type, version)
                 print(strcat(net_name,'.png'), '-dpng');
             end
             
-            log_benchmark(times, err, version)
+            log_benchmark(times, err, version, type)
                        
         case 'test'
             times = []
@@ -41,7 +41,7 @@ function benchmark_implementation(type, version)
                 assert(sum(sum(test_expected - crsom.IW{1})) == 0)
                 err = [sum(sum(test_expected - crsom.IW{1})), err]
             end
-            log_benchmark(times, err, version )
+            log_benchmark(times, err, version, type )
               times
             mean(times)
             'cool cool cool'
