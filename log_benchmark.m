@@ -1,6 +1,6 @@
 function [ output_args ] = log_benchmark(times, err, version )
 
-    filename = sprintf('benchmark_result_%u.log',version);
+    filename = sprintf('benchmark_result_%u.bres',version);
     fileID = fopen(filename,'w');
     
     fprintf(fileID,sprintf('errors: %s\n',  mat2str(err)));
