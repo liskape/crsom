@@ -13,7 +13,7 @@ function benchmark_implementation(type, version)
         case 'benchmark'
             times = []
             err = []
-            for i= 1:10
+            for i= 1:1
                 tic
                 [crsom, in, ta, uc ] = train_problem_versioned('met_mad_la', 500, 'met_mad_la_benchmark', 4, 0.1, 200, 0.01, 1, version );
                 times =  [toc, times];
@@ -22,7 +22,7 @@ function benchmark_implementation(type, version)
                 err = [sum(sum(benchmark_expected - crsom.IW{1})), err]
                 
                 % save image as sanity check
-                net_name = sprintf('met_mad_la_benchmark_version_%d_run_%d',version, i) 
+                net_name = sprintf('met_mad_la_benchmark_version_%s_run_%d',version, i) 
                 my_plot_som(crsom, in, ta);
                 title(net_name);
                 print(strcat(net_name,'.png'), '-dpng');
