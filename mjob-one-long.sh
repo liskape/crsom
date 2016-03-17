@@ -1,7 +1,7 @@
 #!/bin/bash
 #PBS -l matlab=1
 #PBS -l matlab_Neural_Network_Toolbox=1
-#PBS -l mem=16gb
+#PBS -l mem=32gb
 #PBS -m e
 #PBS -l nodes=1
 
