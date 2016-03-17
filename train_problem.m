@@ -1,6 +1,7 @@
 function [ crsom, inputs, targets, untrained, lr2 ] = train_problem(problem, epochs, net_name, normalized, LR2, s0, s_end, map_size)
   
-    data = importdata(strcat(problem, '-in'))
+    data = importdata(strcat(problem, '-in'));
+    
     in = data.data;
     
     if normalized == 1
@@ -13,9 +14,13 @@ function [ crsom, inputs, targets, untrained, lr2 ] = train_problem(problem, epo
         inputs = mapminmax(in', 0);
     elseif normalized == 4
         inputs = mapminmax(in', 0, 0.5);
+    elseif normalized == 5
+        inputs = mapminmax(in', 0, 0.25);
+    else
+        DONT_KNOW_HOW_TO_NORMALIZE_THIS
     end
       
-    targets = importdata(strcat(problem, '-ta'))'
+    targets = importdata(strcat(problem, '-ta'))';
     crsom = create_crsom(inputs, targets, LR2, s0, s_end, map_size);
     crsom.trainParam.epochs = epochs;
     crsom.userdata.net_name = net_name;
