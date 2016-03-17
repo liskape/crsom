@@ -13,7 +13,7 @@ function benchmark_implementation(type, version)
         case 'benchmark'
             times = []
             err = []
-            for i= 1:10
+            for i= 1:3
                 tic
                 [crsom, in, ta, uc ] = train_problem_versioned('met_mad_la', 500, 'met_mad_la_benchmark', 4, 0.1, 200, 0.01, 1, version );
                 times =  [toc, times];
