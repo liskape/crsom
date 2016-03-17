@@ -161,6 +161,8 @@ feedback = nnet.train.defaultFeedbackHandler;
 feedback.start(false,data,net,tr,options,status);
 
 % Train
+net.userdata.errors = ones(1, param.epochs);
+e_in_epoch = ones(1, trainQ);
 for epoch=0:param.epochs
     
     % Stopping Criteria
@@ -190,7 +192,7 @@ for epoch=0:param.epochs
     end
     
     % Each vector (or sequence of vectors) in order
-    e = [];
+    
     for qq=1:trainQ
         
         q = trainInd(qq);
@@ -207,19 +209,13 @@ for epoch=0:param.epochs
                     fcn = fcns.inputWeights(i,j).learn;
                     if fcn.exist
                         Pd = nntraining.pd(net,1,divData.Pc,divData.Pd,i,j,ts);
-                        [dw,IWLS{i,j}, E, new_cn, mean_adjusts, mean_O_h, first_part, second_part, observed_delta_h, observed_koefs] = fcn.apply(net.IW{i,j}, ...
+                        [dw,IWLS{i,j}, E, new_cn] = fcn.apply(net.IW{i,j}, ...
                             Pd,divData.Zi{i,j},divData.N{i},divData.Ac{i,ts+net.numLayerDelays},...
                             [divData.T{ii,ts}],[divData.E{ii,ts}],gIW{i,j,ts},...
                             gA{i,ts},net.layers{i}.distances,fcn.param,IWLS{i,j}, net.userdata.context_net, net.userdata.targets(:,qq), epoch + 1, net, net.userdata.lr2, net.userdata.s_0, net.userdata.s_end);
              
-                        e = [e E];
+                        e_in_epoch(qq) = E;
                         net.userdata.context_net = new_cn;
-%                         net.userdata.mean_adjusts = [net.userdata.mean_adjusts mean_adjusts];
-%                         net.userdata.mean_O_h = [net.userdata.mean_O_h mean_O_h];
-%                          net.userdata.first_part = [net.userdata.first_part first_part];
-%                         net.userdata.second_part = [net.userdata.second_part second_part];
-%                         net.userdata.observed_delta_h = [net.userdata.observed_delta_h observed_delta_h];
-%                         net.userdata.observed_koefs = [net.userdata.observed_koefs observed_koefs];
                          net.IW{i,j} = net.IW{i,j} + dw;
                         
                     end
@@ -228,18 +224,25 @@ for epoch=0:param.epochs
         end
     end
         
-
-        net.userdata.errors = [net.userdata.errors mean(e)];
-
-        if mod(epoch, 100) == 0
-            log_error(epoch, mean(e), net.userdata.net_name);
+        mean_e_in_epoch = mean(e_in_epoch);
+        
+        if net.userdata.store_errors
+            net.userdata.errors(epoch+1) = mean_e_in_epoch;
+        end
+        
+        if net.userdata.enable_logging
+            if mod(epoch, 100) == 0
+                log_error(epoch, mean_e_in_epoch, net.userdata.net_name);
+            end
         end
         
          % create ~ 7 snaps
-        if mod(epoch, ceil(net.trainParam.epochs / 7)) == 0
-            net.userdata.history_snaps = [net.userdata.history_snaps {net.IW{1}}];
-        end        
+        if net.userdata.enable_snapping
+            if mod(epoch, ceil(net.trainParam.epochs / 7)) == 0
+                net.userdata.history_snaps = [net.userdata.history_snaps {net.IW{1}}];
+            end        
+        end
         
-        perf = mean(e);
+        perf = mean_e_in_epoch;
 end % epochs cycle
 end

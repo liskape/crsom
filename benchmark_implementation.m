@@ -33,7 +33,7 @@ function benchmark_implementation(type, version)
         case 'test'
             times = []
             err = []
-            for i= 1:2
+            for i= 1:1
                 tic
                 [crsom, in, ta, uc ] = train_problem_versioned('arctic_monkeys_albs', 20, 'arctic_monkeys_albs_test', 4, 0.1, 200, 0.01, 1, version );
                 times =  [toc, times];

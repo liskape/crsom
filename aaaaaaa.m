@@ -1,0 +1,1 @@
+benchmark_implementation('test', 'bench2')
