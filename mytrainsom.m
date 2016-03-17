@@ -231,8 +231,8 @@ for epoch=0:param.epochs
 
         net.userdata.errors = [net.userdata.errors mean(e)];
 
-        if mod(epoch, 100) == 0
-            log_error(epoch, mean(e), net.userdata.net_name);
+        if mod(epoch, 2) == 0
+           log_error(epoch, mean(e), net.userdata.net_name);
         end
         
          % create ~ 7 snaps
