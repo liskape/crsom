@@ -236,10 +236,10 @@ for epoch=0:param.epochs
         end
         
          % create ~ 7 snaps
-        if mod(epoch, ceil(net.trainParam.epochs / 7)) == 0
-            net.userdata.history_snaps = [net.userdata.history_snaps {net.IW{1}}];
-        end        
-        
+%         if mod(epoch, ceil(net.trainParam.epochs / 7)) == 0
+%             net.userdata.history_snaps = [net.userdata.history_snaps {net.IW{1}}];
+%         end        
+%         
         perf = mean(e);
 end % epochs cycle
 end
