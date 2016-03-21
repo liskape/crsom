@@ -25,7 +25,7 @@ function [ crsom, inputs, targets, untrained, lr2 ] = train_problem_versioned(pr
         case 'bench2'
             crsom = create_crsom(inputs, targets, LR2, s0, s_end, map_size);
         case 'bench3'
-            crsom = create_crsom3(inputs, targets, LR2, s0, s_end, map_size);
+            crsom = create_crsom(inputs, targets, LR2, s0, s_end, map_size);
         otherwise
             FAIL
     end
