@@ -11,8 +11,7 @@ function [ cn ] = context_net2( input, target )
 %   cn.dividefcn = 'dividerand';
 %   cn.trainFcn = 'trainlm';
   
-   cn.performFcn = 'mse';
-   cn.adaptFcn = 'adaptwb';
+   cn.adaptFcn = 'adaptwb2';
    cn.inputWeights{1,1}.learnFcn = 'learngd';
 %    cn.layerWeights{find(cn.layerConnect)'}.learnFcn = 'learngd';
    cn.biases{:}.learnFcn = 'learngd';

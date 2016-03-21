@@ -12,8 +12,6 @@ function [ som ] = create_crsom(inputs, targets, LR2, s_0, s_end, map_size)
     
     som.userdata = struct('context_net', context_net2(ones(nodes_size*nodes_size,1), ones(r_tar,1)), 'targets', targets, 'enable_snapping', false, 'store_errors', false,'enable_logging', false, 'computing_details', false, 'errors', [], 'net_name', '', 'mean_adjusts', [], 'history_snaps', [], 'lr2', LR2, 's_0', s_0, 's_end', s_end, 'mean_O_h', [], 'first_part', [],'second_part', [], 'observed_delta_h', [], 'observed_koefs', []);
     som = configure(som, inputs);
-    clear H;
-    return;
     
     epochs = 1;
     param.dimensions = [nodes_size nodes_size];
@@ -30,7 +28,7 @@ function [ som ] = create_crsom(inputs, targets, LR2, s_0, s_end, map_size)
   net.layers{1}.topologyFcn = param.topologyFcn;
   net.layers{1}.distanceFcn = param.distanceFcn;
   net.inputWeights{1,1}.weightFcn = 'negdist';
-  net.layers{1}.transferFcn = 'somout';
+  net.layers{1}.transferFcn = 'compet';
 
   % Learning
   net.inputWeights{1,1}.learnFcn = 'learncrsom';
@@ -47,7 +45,6 @@ function [ som ] = create_crsom(inputs, targets, LR2, s_0, s_end, map_size)
   % Initialization
   net.initFcn = 'initlay';
   net.layers{1}.initFcn = 'initwb';
-  net.layers{1}.transferFcn = 'somout';
   net.inputWeights{1,1}.initFcn = 'initsompc';
 
   % Plots
@@ -60,9 +57,7 @@ function [ som ] = create_crsom(inputs, targets, LR2, s_0, s_end, map_size)
   net.biases{:}.learnFcn = 'learngd';
   net.layerWeights{2,1}.learnFcn = 'learngd';
   
-  net.divideMode = 'none' 
-  net = configure(net, inputs, targets);
-  net(inputs(:,1))
-  som = net;
+  
+  net = configure(net, inputs, targets)
 end
 
