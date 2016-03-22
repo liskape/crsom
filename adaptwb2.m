@@ -47,16 +47,17 @@ function [net,Ac,tr] = adapt_network(net,PD,T,Ai)
   Q = numsamples(T);
   TS = numtimesteps(T);
 
-  if ~exist('H')
-      hints = nn7.netHints(net);
-      hints = nn.connections(net,hints);
-      hints.simLayerOrder = nn.layer_order(net);
-      hints.outputInd = find(net.outputConnect);
-      H = hints;
-  else
-     hints = H; 
-  end
+%   if isempty(H)
+%       hints = nn7.netHints(net);
+%       hints = nn.connections(net,hints);
+%       hints.simLayerOrder = nn.layer_order(net);
+%       hints.outputInd = find(net.outputConnect);
+%       H = hints;
+%   else
+%      hints = H; 
+%   end
   
+  hints = net.userdata.hints;
   % Constants
   numLayers = net.numLayers;
   numInputs = net.numInputs;

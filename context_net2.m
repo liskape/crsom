@@ -17,6 +17,13 @@ function [ cn ] = context_net2( input, target )
    cn.biases{:}.learnFcn = 'learngd';
    cn = configure(cn, input, target);
    
+  
+    hints = nn7.netHints(cn);
+    hints = nn.connections(cn,hints);
+    hints.simLayerOrder = nn.layer_order(cn);
+    hints.outputInd = find(cn.outputConnect);
+      
+  cn.userdata.hints = hints;
 %    random init
 %    cn.b{1} = rand(size(cn.b{1})) * 0.01 - 0.05;
 %    cn.IW{1} = rand(size(cn.IW{1})) * 0.01 - 0.05;
