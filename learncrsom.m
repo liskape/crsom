@@ -113,7 +113,7 @@ function err = check_param(param)
   err = '';
 end
 
-function [dw,ls, E, new_cn] = apply(w,p,z,n,a,t,e,gW,gA,d,lp,ls)
+function [dw,ls, E] = apply(w,p,z,n,a,t,e,gW,gA,d,lp,ls)
    
 %   [dw, new_cn, E, O_h, first_part, second_part] = context_net_adapt2( cn, crsom, p, target, find(a), t_epoch, crsom.trainParam.epochs, LR2, s_0, send );
 
@@ -123,5 +123,8 @@ function [dw,ls, E, new_cn] = apply(w,p,z,n,a,t,e,gW,gA,d,lp,ls)
 %          crsom.userdata.first_part = [crsom.userdata.first_part mean(first_part)];
 %         crsom.userdata.second_part = [crsom.userdata.second_part mean(second_part)];
 %   end
-
+    dw = zeros(size(gW));
+    ls = ls;
+    E = 0.25;
+    
 end

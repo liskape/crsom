@@ -2,7 +2,7 @@ function [adjustments, new_cn, E, O_h, s, sigma_neig] = context_net_adapt2( cn, 
    [NEURONS, input_size] = size(som.IW{1});
    OUTPUTS = length(target);
    [O_h, sigma_neig, I_h, s] = crsom_hidden_output(som, input', NEURONS, win, t, t_end, s_0, s_end);
-   [new_cn,Y,E,Pf,Af,tr] = adapt(cn, O_h, target);
+   [new_cn,Y,E,Pf,Af,tr] = adapt2(cn, O_h, target);
 
 %     Y = sim(cn, O_h);
 %     new_cn  = cn;

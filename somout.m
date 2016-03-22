@@ -3,10 +3,11 @@ function [ a ] = somout( n, varargin )
 %   Detailed explanation goes here
 
 if ischar(n)
-%   a = nnet7.transfer_fcn(mfilename,n,varargin{:});
-    a = compet(n);
+    a = nnet7.transfer_fcn(mfilename,n,varargin{:});
     return;
 end
 
+a = somout.apply(n);
+  
 end
 

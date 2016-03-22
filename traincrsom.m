@@ -1,15 +1,15 @@
 function [out1,out2] = traincrsom(varargin)
-%TRAINS Sequential order weight/bias training.
+%TRAINC Cyclical order weight/bias training.
 %
-%  <a href="matlab:doc trains">trains</a> trains a network with weight and bias learning rules with
+%  <a href="matlab:doc trainc">trainc</a> trains a network with weight and bias learning rules with
 %  incremental updates after each presentation of an input.  Inputs
 %  are presented in cyclic order.
 %
-%  [NET,TR] = <a href="matlab:doc trains">trains</a>(NET,X,T) takes a network NET, input data X
+%  [NET,TR] = <a href="matlab:doc trainc">trainc</a>(NET,X,T) takes a network NET, input data X
 %  and target data T and returns the network after training it, and a
 %  a training record TR.
 %
-%  [NET,TR] = <a href="matlab:doc trains">trains</a>(NET,X,T,Xi,Ai,EW) takes additional optional
+%  [NET,TR] = <a href="matlab:doc trainc">trainc</a>(NET,X,T,Xi,Ai,EW) takes additional optional
 %  arguments suitable for training dynamic networks and training with
 %  error weights.  Xi and Ai are the initial input and layer delays states
 %  respectively and EW defines error weights used to indicate
@@ -20,19 +20,20 @@ function [out1,out2] = traincrsom(varargin)
 %  pairs appended to the input argument list, or by appending a structure
 %  argument with fields having one or more of these names.
 %    epochs            1000  Maximum number of epochs to train
+%    goal      0  Performance goal
+%    max_fail  5  Maximum validation failures
 %    show                25  Epochs between displays
 %    showCommandLine  false  Generate command-line output
 %    showWindow        true  Show training GUI
-%    goal                 0  Performance goal
-%    time               inf  Maximum time to train in seconds
+%    time    inf  Maximum time to train in seconds
 %
 %  To make this the default training function for a network, and view
 %  and/or change parameter settings, use these two properties:
 %
-%    net.<a href="matlab:doc nnproperty.net_trainFcn">trainFcn</a> = 'trains';
+%    net.<a href="matlab:doc nnproperty.net_trainFcn">trainFcn</a> = 'trainc';
 %    net.<a href="matlab:doc nnproperty.net_trainParam">trainParam</a>
 %
-%  See also TRAIN, TRAINC, TRAINB.
+%  See also COMPETLAYER, TRAIN.
 
 % Copyright 1992-2014 The MathWorks, Inc.
 
@@ -92,9 +93,9 @@ function info = get_info
 isSupervised = true;
 usesGradient = true;
 usesJacobian = false;
-usesValidation = false;
+usesValidation = true;
 supportsCalcModes = false;
-info = nnfcnTraining(mfilename,'Sequential Weight/Bias Rule',8.0,...
+info = nnfcnTraining(mfilename,'Cyclical Weight/Bias Rule',8.0,...
     isSupervised,usesGradient,usesJacobian,usesValidation,supportsCalcModes,...
     [ ...
     nnetParamInfo('showWindow','Show Training Window Feedback','nntype.bool_scalar',true,...
@@ -130,8 +131,6 @@ end
 
 function [net,tr] = train_network(net,tr,data,options,fcns,param)
 
-% Checks
-
 % Initialize
 needGradient = nn.needsGradient(net);
 startTime = clock;
@@ -141,9 +140,8 @@ BP = 1;
 IWLS = cell(net.numLayers,net.numInputs);
 LWLS = cell(net.numLayers,net.numLayers);
 BLS = cell(net.numLayers,1);
-TS = data.TS;
-Ac = [data.Ai cell(net.numLayers,TS)];
-AiInd = 0:(net.numLayerDelays-1);
+trainInd = nncalc.mask2SampleInd(data.train.mask);
+trainQ = length(trainInd);
 layer2output = num2cell(cumsum(net.outputConnect));
 layer2output(~net.outputConnect) = {[]};
 
@@ -191,69 +189,54 @@ for epoch=0:param.epochs
         break
     end
     
-    % Update with Weight and Bias Learning Functions
-    for ts=1:data.TS
+    % Each vector (or sequence of vectors) in order
+    for qq=1:trainQ
         
-        divData.TS = 1;
-        divData.Q = data.Q;
-        if isempty(data.Pc)
-            divData.Pc = {};
-        else
-            divData.Pc = data.Pc(:,ts);
-        end
-        if isempty(data.Pd)
-            divData.Pd = {};
-        else
-            divData.Pd = data.Pd(:,:,ts);
-        end
-        divData.Ai = Ac(:,ts+AiInd);
-        divData.T = data.T(:,ts);
-        if size(data.EW,2) > 1
-            divData.EW = data.EW(:,ts);
-        else
-            divData.EW = data.EW;
-        end
+        q = trainInd(qq);
+        divData = nncalc.split_data(data,q);
+        [dperf,divData,gB,gIW,gLW,gA] = nn7.perf_sig_grad(net,divData,needGradient,fcns);
         
-        [~,divData,gB,gIW,gLW,gA] = nn7.perf_sig_grad(net,divData,needGradient,fcns);
-        
-        for i=1:net.numLayers
-            ii = layer2output{i};
-            
-            % Update Input Weight Values
-            for j=find(net.inputConnect(i,:))
-                fcn = fcns.inputWeights(i,j).learn;
-                if fcn.exist
-                    Pd = nntraining.pd(net,1,divData.Pc,divData.Pd,i,j,1);
-                    [dw,IWLS{i,j}] = fcn.apply(net.IW{i,j}, ...
-                        Pd,divData.Zi{i,j},divData.N{i},divData.Ac{i,1+net.numLayerDelays},...
-                        [divData.T{ii,1}],[divData.E{ii,1}],gIW{i,j,1},...
-                        gA{i,1},net.layers{i}.distances,fcn.param,IWLS{i,j});
-                    net.IW{i,j} = net.IW{i,j} + dw;
+        % Update with Weight and Bias Learning Functions
+        for ts=1:data.TS
+            for i=1:net.numLayers
+                ii = layer2output{i};
+                
+                % Update Input Weight Values
+                for j=find(net.inputConnect(i,:))
+                    fcn = fcns.inputWeights(i,j).learn;
+                    if fcn.exist
+                        Pd = nntraining.pd(net,1,divData.Pc,divData.Pd,i,j,ts);
+                        [dw,IWLS{i,j}] = fcn.apply(net.IW{i,j}, ...
+                            Pd,divData.Zi{i,j},divData.N{i},divData.Ac{i,ts+net.numLayerDelays},...
+                            [divData.T{ii,ts}],[divData.E{ii,ts}],gIW{i,j,ts},...
+                            gA{i,ts},net.layers{i}.distances,fcn.param,IWLS{i,j});
+                        net.IW{i,j} = net.IW{i,j} + dw;
+                    end
                 end
-            end
-            
-            % Update Layer Weight Values
-            for j=find(net.layerConnect(i,:))
-                fcn = fcns.layerWeights(i,j).learn;
-                if fcn.exist
-                    Ad = cell2mat(divData.Ac(j,1+net.numLayerDelays-net.layerWeights{i,j}.delays)');
-                    [dw,LWLS{i,j}] = fcn.apply(net.LW{i,j}, ...
-                        Ad,divData.Zl{i,j},divData.N{i},divData.Ac{i,1+net.numLayerDelays},...
-                        [divData.T{ii,1}],[divData.E{ii,1}],gLW{i,j,1},...
-                        gA{i,1},net.layers{i}.distances,fcn.param,LWLS{i,j});
-                    net.LW{i,j} = net.LW{i,j} + dw;
+                
+                % Update Layer Weight Values
+                for j=find(net.layerConnect(i,:))
+                    fcn = fcns.layerWeights(i,j).learn;
+                    if fcn.exist
+                        Ad = cell2mat(divData.Ac(j,ts+net.numLayerDelays-net.layerWeights{i,j}.delays)');
+                        [dw,LWLS{i,j}] = fcn.apply(net.LW{i,j}, ...
+                            Ad,divData.Zl{i,j},divData.N{i},divData.Ac{i,ts+net.numLayerDelays},...
+                            [divData.T{ii,ts}],[divData.E{ii,ts}],gLW{i,j,ts},...
+                            gA{i,ts},net.layers{i}.distances,fcn.param,LWLS{i,j});
+                        net.LW{i,j} = net.LW{i,j} + dw;
+                    end
                 end
-            end
-            
-            % Update Bias Values
-            if net.biasConnect(i)
-                fcn = fcns.biases(i).learn;
-                if fcn.exist
-                    [db,BLS{i}] = fcn.apply(net.b{i}, ...
-                        BP,divData.Zb{i},divData.N{i},divData.Ac{i,1+net.numLayerDelays},...
-                        [divData.T{ii,1}],[divData.E{ii,1}],gB{i,1},...
-                        gA{i,1},net.layers{i}.distances,fcn.param,BLS{i});
-                    net.b{i} = net.b{i} + db;
+                
+                % Update Bias Values
+                if net.biasConnect(i)
+                    fcn = fcns.biases(i).learn;
+                    if fcn.exist
+                        [db,BLS{i}] = fcn.apply(net.b{i}, ...
+                            BP,divData.Zb{i},divData.N{i},divData.Ac{i,ts+net.numLayerDelays},...
+                            [divData.T{ii,ts}],[divData.E{ii,ts}],gB{i,ts},...
+                            gA{i,ts},net.layers{i}.distances,fcn.param,BLS{i});
+                        net.b{i} = net.b{i} + db;
+                    end
                 end
             end
         end
