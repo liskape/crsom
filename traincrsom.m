@@ -163,6 +163,8 @@ feedback.start(false,data,net,tr,options,status);
 som = net.userdata.som;
 u = som.userdata;
 LR2 = u.lr2;
+[N, DIM] = size(som.IW{1});
+divData = nncalc.split_data(data,1);
 % Train
 for epoch=0:param.epochs
     
@@ -194,20 +196,34 @@ for epoch=0:param.epochs
     
     % Each vector (or sequence of vectors) in order
     for qq=1:trainQ
+%         
+        q = qq;
+%         divData = nncalc.split_data(data,1);
         
-        q = trainInd(qq);
-        divData = nncalc.split_data(data,q);
     % ------------------------------------------------------
 %         som(u.inputs(:,q));
-        input = u.inputs(:,q);
-        o = som(input);
-        [result, sigma_neig, I, s] = crsom_hidden_output(som, u.inputs(:,q), length(o), find(o), epoch + 1, param.epochs, 200, 0.01);
+         
+         
+        input = u.inputs(:,qq);
+%         o = som(input);
+        d = repmat(input',N, 1) - som.IW{1};
+        dist = zeros(N, 1);
+        for i = 1:N
+          dist(i) = norm(d(i,:));
+        end
+      
+        
+        o = dist == min(dist);
+       
+        [result, sigma_neig, s] = crsom_hidden_output(som, u.inputs(:,q), length(o), find(o), epoch + 1, param.epochs, 200, 0.01, dist);
 
     % ---------------------------------------------------
         
         divData.X{1} = result;
          divData.Pc{1} = result;
           divData.Pd{1} = result;
+          divData.T{1} = u.targets(:,q);
+
         
         [dperf,divData,gB,gIW,gLW,gA] = nn7.perf_sig_grad(net,divData,needGradient,fcns);
         
@@ -222,13 +238,8 @@ for epoch=0:param.epochs
    first_part = -s;
    delta_ks = repmat(delta_k', NEURONS, 1);
    sumation = sum((delta_ks.*(net.IW{1}'))')';
-   delta_h = first_part .* sumation;
-   
-   d = repmat(input', NEURONS, 1)  - som.IW{1};
-  
-   adjustments = d.* repmat(sigma_neig.*delta_h .* LR2, 1, input_size);
-        
-    som.IW{1} = som.IW{1} + adjustments;
+   delta_h = first_part .* sumation;  
+    som.IW{1} = som.IW{1} + d.* repmat(sigma_neig.*delta_h .* LR2, 1, input_size);
    
         % Update with Weight and Bias Learning Functions
         for ts=1:data.TS

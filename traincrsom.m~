@@ -160,7 +160,11 @@ status = ...
     ];
 feedback = nnet.train.defaultFeedbackHandler;
 feedback.start(false,data,net,tr,options,status);
-
+som = net.userdata.som;
+u = som.userdata;
+LR2 = u.lr2;
+[N, DIM] = size(som.IW{1});
+divData = nncalc.split_data(data,1);
 % Train
 for epoch=0:param.epochs
     
@@ -192,23 +196,51 @@ for epoch=0:param.epochs
     
     % Each vector (or sequence of vectors) in order
     for qq=1:trainQ
+%         
+        q = qq;
+%         divData = nncalc.split_data(data,1);
         
-        q = trainInd(qq);
-        divData = nncalc.split_data(data,q);
     % ------------------------------------------------------
-        som = net.userdata.som;
-        u = som.userdata;
+%         som(u.inputs(:,q));
+         
+         
+        input = u.inputs(:,qq);
+%         o = som(input);
+        d = repmat(input',N, 1) - som.IW{1};
+        dist = zeros(N, 1);
+        for i = 1:N
+          dist(i) = norm(d(i,:));
+        end
+      
         
-        
+        o = dist == min(dist);
+       
+        [result, sigma_neig, s] = crsom_hidden_output(som, u.inputs(:,q), length(o), find(o), epoch + 1, param.epochs, 200, 0.01, dist);
 
     % ---------------------------------------------------
         
+        divData.X{1} = result;
+         divData.Pc{1} = result;
+          divData.Pd{1} = result;
+          divData.T{1} = u.targets(:,q);
+
         
         [dperf,divData,gB,gIW,gLW,gA] = nn7.perf_sig_grad(net,divData,needGradient,fcns);
         
         
+        Y = divData.Y{1};
+        target = divData.T{1};
+        NEURONS = length(o);
+        input_size = length(input);
         
-        
+           delta_k = (Y - target).* Y.* (1 - Y);
+
+   first_part = -s;
+   delta_ks = repmat(delta_k', NEURONS, 1);
+   sumation = sum((delta_ks.*(net.IW{1}'))')';
+   delta_h = first_part .* sumation;  
+    som.IW{1} = som.IW{1} + d.* repmat(sigma_neig.*delta_h .* LR2, 1, input_size);
+   
         % Update with Weight and Bias Learning Functions
         for ts=1:data.TS
             for i=1:net.numLayers
@@ -257,6 +289,7 @@ for epoch=0:param.epochs
     
     [perf,vperf,tperf] = nn7.trainValTestPerfs(net,data,fcns);
 end
+    net.userdata.som = som;
 end
 
 % TODO - Add Validation
