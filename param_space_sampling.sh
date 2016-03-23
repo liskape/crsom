@@ -5,11 +5,11 @@
 #PBS -m e
 #PBS -l nodes=1#excl
 
-PROBLEMS="met_mad_la"
-LEARNING_RATES="0.1"
-EPOCHS="500"
-NORMALIZE="4"
-MAP_SIZE="1"
+PROBLEMS="katy-ram"
+LEARNING_RATES="0.1 0.01"
+EPOCHS="500 1000 2000"
+NORMALIZE="3 4 5"
+MAP_SIZE="1 0.75"
 
 for p in `echo $PROBLEMS`
 do
