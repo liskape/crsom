@@ -1,1 +1,1 @@
-benchmark_implementation('test', 'bench3')
+benchmark_implementation('benchmark', 'bench4')
