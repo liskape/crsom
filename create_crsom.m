@@ -60,9 +60,19 @@ function [ som ] = create_crsom(inputs, targets, LR2, s_0, s_end, map_size)
   net.layerWeights{2,1}.learnFcn = 'learngd';
   
   net.divideMode = 'none' 
-  net = configure(net, inputs(1:3), targets(1:3));
- 
-  net(inputs(:,1))
-  som = net;
+  net = configure(net, inputs, targets);
+
+%   som = net;
+%   som.userdata = struct('context_net', context_net2(ones(nodes_size*nodes_size,1), ones(r_tar,1)), 'targets', targets, 'enable_snapping', false, 'store_errors', false,'enable_logging', false, 'computing_details', false, 'errors', [], 'net_name', '', 'mean_adjusts', [], 'history_snaps', [], 'lr2', LR2, 's_0', s_0, 's_end', s_end, 'mean_O_h', [], 'first_part', [],'second_part', [], 'observed_delta_h', [], 'observed_koefs', []);
+   
+  
+  
+  cn = som.userdata.context_net;
+  cn.trainFcn = 'traincrsom';
+  cn.userdata.som = som;
+  cn.trainParam.epochs = 100;
+  
+  som = cn;
+
 end
 

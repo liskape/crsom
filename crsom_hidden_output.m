@@ -5,7 +5,7 @@ function [result, neighborhood_restiction, I, s] = crsom_hidden_output(map, inpu
         
     w = map.IW{1};
     
-    d = repmat(input, neurons, 1) - w;
+    d = repmat(input', neurons, 1) - w;
     
     I = zeros(neurons, 1);
     

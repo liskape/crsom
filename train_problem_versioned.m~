@@ -33,12 +33,11 @@ function [ crsom, inputs, targets, untrained, lr2 ] = train_problem_versioned(pr
     
     crsom.trainParam.epochs = epochs;
     crsom.userdata.net_name = net_name;
-    
-    crsom.userdata.som.userdata.inputs = inputs;
-    crsom.userdata.som.userdata.targets = targets;
-    s = crsom.userdata.som;
-    untrained = s; 
-    context_inputs = s(inputs);
-    crsom = train(crsom, context_inputs, targets);
+    untrained = crsom;
+    crsom.userdata.som.userdata.inputs = inputs
+    crsom.userdata.som.userdata.targets = targets
+    s 
+    context_inputs = 
+    crsom = train(crsom, inputs, targets);
 end
 

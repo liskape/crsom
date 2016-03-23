@@ -39,8 +39,9 @@ function benchmark_implementation(type, version)
                 [crsom, in, ta, uc ] = train_problem_versioned('arctic_monkeys_albs', 20, 'arctic_monkeys_albs_test', 4, 0.1, 200, 0.01, 1, version );
                 times =  [toc, times];
                 load('test_expected.mat')
-                assert(sum(sum(test_expected - crsom.IW{1})) == 0)
-                err = [sum(sum(test_expected - crsom.IW{1})), err]
+                som = crsom.userdata.som;
+                assert(sum(sum(test_expected - som.IW{1})) == 0)
+                err = [sum(sum(test_expected - som.IW{1})), err]
             end
             log_benchmark(times, err, version, type )
               times

@@ -61,8 +61,17 @@ function [ som ] = create_crsom(inputs, targets, LR2, s_0, s_end, map_size)
   
   net.divideMode = 'none' 
   net = configure(net, inputs, targets);
-  train(net, inputs(:,1:2), targets(:,1:2));
-  net(inputs(:,1))
+
   som = net;
+  som.userdata = struct('context_net', context_net2(ones(nodes_size*nodes_size,1), ones(r_tar,1)), 'targets', targets, 'enable_snapping', false, 'store_errors', false,'enable_logging', false, 'computing_details', false, 'errors', [], 'net_name', '', 'mean_adjusts', [], 'history_snaps', [], 'lr2', LR2, 's_0', s_0, 's_end', s_end, 'mean_O_h', [], 'first_part', [],'second_part', [], 'observed_delta_h', [], 'observed_koefs', []);
+   
+  
+  
+  cn = som.userdata.context_net;
+  cn.trainFcn = 'traincrsom';
+  cn.userdata.som = som;
+  
+  som = cn;
+
 end
 

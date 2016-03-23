@@ -160,9 +160,7 @@ status = ...
     ];
 feedback = nnet.train.defaultFeedbackHandler;
 feedback.start(false,data,net,tr,options,status);
-som = net.userdata.som;
-u = som.userdata;
-LR2 = u.lr2;
+
 % Train
 for epoch=0:param.epochs
     
@@ -198,38 +196,19 @@ for epoch=0:param.epochs
         q = trainInd(qq);
         divData = nncalc.split_data(data,q);
     % ------------------------------------------------------
-%         som(u.inputs(:,q));
-        input = u.inputs(:,q);
-        o = som(input);
-        [result, sigma_neig, I, s] = crsom_hidden_output(som, u.inputs(:,q), length(o), find(o), epoch + 1, param.epochs, 200, 0.01);
+        som = net.userdata.som;
+        u = som.userdata;
+        
+        
 
     % ---------------------------------------------------
         
-        divData.X{1} = result;
-         divData.Pc{1} = result;
-          divData.Pd{1} = result;
         
         [dperf,divData,gB,gIW,gLW,gA] = nn7.perf_sig_grad(net,divData,needGradient,fcns);
         
         
-        Y = divData.Y{1};
-        target = divData.T{1};
-        NEURONS = length(o);
-        input_size = length(input);
         
-           delta_k = (Y - target).* Y.* (1 - Y);
-
-   first_part = -s;
-   delta_ks = repmat(delta_k', NEURONS, 1);
-   sumation = sum((delta_ks.*(net.IW{1}'))')';
-   delta_h = first_part .* sumation;
-   
-   d = repmat(input', NEURONS, 1)  - som.IW{1};
-  
-   adjustments = d.* repmat(sigma_neig.*delta_h .* LR2, 1, input_size);
         
-    som.IW{1} = som.IW{1} + adjustments;
-   
         % Update with Weight and Bias Learning Functions
         for ts=1:data.TS
             for i=1:net.numLayers
@@ -278,7 +257,6 @@ for epoch=0:param.epochs
     
     [perf,vperf,tperf] = nn7.trainValTestPerfs(net,data,fcns);
 end
-    net.userdata.som = som;
 end
 
 % TODO - Add Validation
