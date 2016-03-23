@@ -21,10 +21,10 @@ function benchmark_implementation(type, version)
 %                 load('benchmark_expected.mat')
 %                 assert(sum(sum(benchmark_expected - crsom.IW{1})) == 0)
 %                 err = [sum(sum(benchmark_expected - crsom.IW{1})), err]
-                
+                som = crsom.userdata.som;
                 % save image as sanity check
                 net_name = sprintf('met_mad_la_benchmark_version_%s_run_%d',version, i) 
-                my_plot_som(crsom, in, ta);
+                my_plot_som(som, in, ta);
                 title(net_name);
                 print(strcat(net_name,'.png'), '-dpng');
             end
