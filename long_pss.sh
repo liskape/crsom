@@ -1,10 +1,10 @@
 #!/bin/bash
 
-PROBLEMS="year_2010vs1990"
+PROBLEMS="year_2010vs1970_small year_1960vs1970"
 LEARNING_RATES="0.1"
-EPOCHS="200"
-NORMALIZE="4"
-MAP_SIZE="1"
+EPOCHS="500 1000"
+NORMALIZE="3 4 5"
+MAP_SIZE="1 0.9"
 
 for p in `echo $PROBLEMS`
 do
