@@ -5,8 +5,8 @@
 #PBS -m e
 #PBS -l nodes=1#excl
 
-PROBLEMS="katy-ram"
-LEARNING_RATES="0.1 0.01"
+PROBLEMS="am_kp_acdc eminem-chemb-am katy-ram db_stones_acdc katy-soad-2 met_mad_la met_mad_la_random1 mj_elvis_pf off-sexp user_4e11f"
+LEARNING_RATES="0.1"
 EPOCHS="500 1000 2000"
 NORMALIZE="3 4 5"
 MAP_SIZE="1 0.75"
