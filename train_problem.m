@@ -1,4 +1,4 @@
-function [ crsom, inputs, targets, untrained, lr2 ] = train_problem(problem, epochs, net_name, normalized, LR2, s0, s_end, map_size)
+function [ crsom, inputs, targets, untrained, trained_som ] = train_problem(problem, epochs, net_name, normalized, LR2, s0, s_end, map_size)
   
     data = importdata(strcat(problem, '-in'));
     
@@ -19,10 +19,7 @@ function [ crsom, inputs, targets, untrained, lr2 ] = train_problem(problem, epo
     else
         DONT_KNOW_HOW_TO_NORMALIZE_THIS
     end
-      
-    
-    
-    
+       
     targets = importdata(strcat(problem, '-ta'))';
     crsom = create_crsom(inputs, targets, LR2, s0, s_end, map_size);
 
@@ -36,8 +33,13 @@ function [ crsom, inputs, targets, untrained, lr2 ] = train_problem(problem, epo
     context_inputs = s(inputs);
     crsom = train(crsom, context_inputs, targets);
     
-    
     crsom = crsom.userdata.som
+        
+    [neurons, dims] = size(crsom.IW{1});
+    nodes_size = sqrt(neurons);
+    trained_som = selforgmap([nodes_size nodes_size],10, 3, 'gridtop', 'dist');
+    trained_som.trainParam.showWindow = false;
+    trained_som = train(trained_som, inputs);
     % actual data 
     % gscatter(inputs(1,:), inputs(2,:), vec2ind(targets)')
 end

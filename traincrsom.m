@@ -162,6 +162,34 @@ feedback = nnet.train.defaultFeedbackHandler;
 feedback.start(false,data,net,tr,options,status);
 som = net.userdata.som;
 u = som.userdata;
+
+% Initialize debugging ---------------------
+if u.store_errors
+  mean_errors = zeros(1, param.epochs);
+  errors = zeros(1, length(u.targets));
+else
+  errors = [];
+end
+
+
+
+  mean_adjust = zeros(1, param.epochs);
+  epoch_adjust = zeros(1, length(u.targets));
+  
+  mean_s = zeros(1, param.epochs);
+  epoch_s = zeros(1, length(u.targets));
+  
+  mean_sigma = zeros(1, param.epochs);
+  epoch_sigma = zeros(1, length(u.targets));
+
+  mean_O_h = zeros(1, param.epochs);
+  epoch_O_h = zeros(1, length(u.targets));
+  
+  
+history_snaps = [];
+
+
+% -----------------------------------------------
 LR2 = u.lr2;
 [N, DIM] = size(som.IW{1});
 divData = nncalc.split_data(data,1);
@@ -227,20 +255,35 @@ for epoch=0:param.epochs
         
         [dperf,divData,gB,gIW,gLW,gA] = nn7.perf_sig_grad(net,divData,needGradient,fcns);
         
-        
+       
         Y = divData.Y{1};
         target = divData.T{1};
         NEURONS = length(o);
         input_size = length(input);
         
-           delta_k = (Y - target).* Y.* (1 - Y);
+         delta_k = (Y - target).* Y.* (1 - Y);
 
-   first_part = -s;
-   delta_ks = repmat(delta_k', NEURONS, 1);
-   sumation = sum((delta_ks.*(net.IW{1}'))')';
-   delta_h = first_part .* sumation;  
-    som.IW{1} = som.IW{1} + d.* repmat(sigma_neig.*delta_h .* LR2, 1, input_size);
-   
+       first_part = -s;
+       delta_ks = repmat(delta_k', NEURONS, 1);
+       sumation = sum((delta_ks.*(net.IW{1}'))')';
+       delta_h = first_part .* sumation;
+       adjust = d.* repmat(sigma_neig.*delta_h .* LR2, 1, input_size);
+       som.IW{1} = som.IW{1} + adjust;
+    
+       
+%------------- logging ---------------------------------
+        if u.store_errors
+           errors(qq) = dperf;
+        end
+        
+        if u.computing_details              
+          epoch_adjust(qq) = mean(mean(adjust)');
+          epoch_s(qq) = mean(s);
+          epoch_sigma(qq) = mean(sigma_neig);
+          epoch_O_h(qq) = mean(result); 
+        end
+% --------------------------------------------------------------  
+       
         % Update with Weight and Bias Learning Functions
         for ts=1:data.TS
             for i=1:net.numLayers
@@ -287,8 +330,44 @@ for epoch=0:param.epochs
         end
     end
     
-    [perf,vperf,tperf] = nn7.trainValTestPerfs(net,data,fcns);
+%     [perf,vperf,tperf] = nn7.trainValTestPerfs(net,data,fcns);
+    
+    
+
+    if u.store_errors
+      mean_error = mean(errors);
+      mean_errors(epoch+1) = mean_error;
+      perf = mean_error;
+    end
+    
+    if u.enable_snapping
+        if mod(epoch, ceil(net.trainParam.epochs / 7)) == 0
+            history_snaps = [history_snaps {som.IW{1}}];
+        end        
+    end
+    
+    if u.computing_details
+%        mean_adjust(epoch+1) = mean(epoch_adjust);
+%        mean_s(epoch+1) = mean(epoch_s);
+%        mean_sigma(epoch+1) = mean(epoch_sigma);
+%        mean_O_h(epoch+1) = mean(epoch_O_h);
+
+    mean_adjust = [mean_adjust epoch_adjust];
+    mean_s = [mean_s epoch_s];
+    mean_sigma = [mean_sigma epoch_sigma];
+    mean_O_h = [mean_O_h epoch_O_h];
+    end
+    
 end
+
+
+    som.userdata.mean_adjusts = mean_adjust;
+    som.userdata.first_part = mean_s;
+    som.userdata.second_part = mean_sigma;
+    som.userdata.errors = mean_errors;
+    som.userdata.history_snaps = history_snaps;
+    som.userdata.mean_O_h = mean_O_h;
+    
     net.userdata.som = som;
 end
 
