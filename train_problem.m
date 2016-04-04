@@ -9,7 +9,7 @@ function [ crsom, inputs, targets, untrained, trained_som ] = train_problem(prob
     elseif normalized == 2
         inputs = mapstd(in');
     elseif normalized == 0
-        inputs = in
+        inputs = in'
     elseif normalized == 3
         inputs = mapminmax(in', 0);
     elseif normalized == 4
