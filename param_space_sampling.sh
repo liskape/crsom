@@ -5,11 +5,11 @@
 #PBS -m e
 #PBS -l nodes=1#excl
 
-PROBLEMS="am_kp_acdc eminem-chemb-am katy-ram db_stones_acdc katy-soad-2 met_mad_la met_mad_la_random1 mj_elvis_pf off-sexp user_4e11f"
-LEARNING_RATES="0.1"
-EPOCHS="500 1000 2000"
-NORMALIZE="3 4 5"
-MAP_SIZE="1 0.75"
+PROBLEMS="katy-ram-investigate"
+LEARNING_RATES="0.01 0.05 0.1 0.2"
+EPOCHS="100 500 1000 2000 5000"
+NORMALIZE="0 1 2 3 4 5"
+MAP_SIZE="1"
 
 for p in `echo $PROBLEMS`
 do
