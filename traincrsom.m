@@ -367,7 +367,8 @@ end
     som.userdata.errors = mean_errors;
     som.userdata.history_snaps = history_snaps;
     som.userdata.mean_O_h = mean_O_h;
-    
+    som.userdata.net_name = net.userdata.net_name;
+ 
     net.userdata.som = som;
 end
 
