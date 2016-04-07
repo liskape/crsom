@@ -1,6 +1,7 @@
 function [ crsom, inputs, targets, untrained, trained_som, ids ] = train_problem(problem, epochs, net_name, normalized, LR2, s0, s_end, map_size)
   
-    data = importdata(strcat(problem, '-in'));
+    
+    data = importdata(strcat('/datasets/',problem, '-in'));
     
     ids = data.textdata;
     in = data.data;
