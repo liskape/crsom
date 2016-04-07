@@ -187,8 +187,8 @@ end
   
   
 history_snaps = [];
-
-
+context_snaps = [];
+snapped_epochs = []
 % -----------------------------------------------
 LR2 = u.lr2;
 [N, DIM] = size(som.IW{1});
@@ -341,8 +341,10 @@ for epoch=0:param.epochs
     end
     
     if u.enable_snapping
-        if mod(epoch, ceil(net.trainParam.epochs / 7)) == 0
+        if mod(epoch, ceil(net.trainParam.epochs / 8)) == 0
+            snapped_epochs = [snapped_epochs epoch];
             history_snaps = [history_snaps {som.IW{1}}];
+            context_snaps = [context_snaps net]
         end        
     end
     
@@ -366,9 +368,12 @@ end
     som.userdata.second_part = mean_sigma;
     som.userdata.errors = mean_errors;
     som.userdata.history_snaps = history_snaps;
+    som.userdata.context_snaps = context_snaps;
+    som.userdata.snapped_epochs = snapped_epochs;
     som.userdata.mean_O_h = mean_O_h;
     som.userdata.net_name = net.userdata.net_name;
- 
+    som.userdata.context_net = net;
+
     net.userdata.som = som;
 end
 

@@ -35,6 +35,19 @@ function [ output_args ] = plotting3( crsom, uc, us, inputs, targets )
      plot_crsom_attrs(crsom);
      title(crsom.userdata.net_name); 
      
+     figure(4);
+     plotsomnd(crsom);
+     title(crsom.userdata.net_name); 
+     
+     
+     figure(5);
+     plotsomhits(crsom, inputs);
+     title(crsom.userdata.net_name); 
+     
+     figure(6);
+     plotsompos(crsom, inputs);
+
+     
 %      figure(5);
 %      animate_position_formation(crsom, inputs);
 %      title(crsom.userdata.net_name);
