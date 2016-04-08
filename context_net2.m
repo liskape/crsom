@@ -1,29 +1,11 @@
 function [ cn ] = context_net2( input, target ) 
    cn = network(1,1,1,1,0,1) ;
    cn.layers{1}.transferFcn = 'logsig';
-%    cn.initFcn = 'initwb';
-%    cn.layers{:}.initFcn = 'initlay';
-%    cn.inputWeights{:,:}.initFcn = 'initwb';
-%    cn.biases{:}.initFcn = 'initwb';
-   
-   
-   % Training
-%   cn.dividefcn = 'dividerand';
-%   cn.trainFcn = 'trainlm';
-  
-   cn.adaptFcn = 'adaptwb2';
+   cn.adaptFcn = 'adaptwb';
    cn.inputWeights{1,1}.learnFcn = 'learngd';
-%    cn.layerWeights{find(cn.layerConnect)'}.learnFcn = 'learngd';
    cn.biases{:}.learnFcn = 'learngd';
    cn = configure(cn, input, target);
    
-  
-    hints = nn7.netHints(cn);
-    hints = nn.connections(cn,hints);
-    hints.simLayerOrder = nn.layer_order(cn);
-    hints.outputInd = find(cn.outputConnect);
-      
-  cn.userdata.hints = hints;
 %    random init
 %    cn.b{1} = rand(size(cn.b{1})) * 0.01 - 0.05;
 %    cn.IW{1} = rand(size(cn.IW{1})) * 0.01 - 0.05;

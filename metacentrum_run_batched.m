@@ -1,7 +1,7 @@
 function metacentrum_run_batched(p, lr, e, n, ms)
 % *************************************************************************
 epochs = e;
-normalize = n; % 0 = do not normalize, 1 = minmax, 2 = mapstd, 3 = minmax 0-1, 4 = minmax 0-0,5
+normalize = n; % 0 = do not normalize, 1 = minmax, 2 = mapstd, 3 = minmax 0-1, 4 = minmax 0-0.5 5 = minmax 0-0.25
 LR2 = lr;
 settings = '';
 problem = p;
