@@ -29,7 +29,7 @@ With `.mat` loaded in your workspace you can treat it the same way as result of 
 plotsompos(crsom, in)
 ```
 
-![plotsomnd](http://s22.postimg.org/er1c48d6p/Screen_Shot_2016_04_08_at_14_00_43.png)
+![plotsompos](http://s22.postimg.org/er1c48d6p/Screen_Shot_2016_04_08_at_14_00_43.png)
 
 ```
 plotsomhits(crsom, in)
@@ -40,18 +40,18 @@ plotsomhits(crsom, in)
 ```
 plotsomnd(crsom)
 ```
-![plotsompos](http://s16.postimg.org/o6bqompl1/Screen_Shot_2016_04_08_at_13_59_38.png)
+![plotsomnd](http://s16.postimg.org/o6bqompl1/Screen_Shot_2016_04_08_at_13_59_38.png)
 
 
 ### semantic plots
 ```
 plot_crsom_summary(crsom, us,uc, in, ta)
 ```
-![my_plot_som_no_confl](http://s21.postimg.org/arvt9a0c7/Screen_Shot_2016_04_08_at_14_17_58.png)
+![plot_crsom_summary](http://s21.postimg.org/arvt9a0c7/Screen_Shot_2016_04_08_at_14_17_58.png)
 ```
 animate_map_formation2( crsom, in, ta )
 ```
-![my_plot_som_no_confl](http://s9.postimg.org/g1c2ewm5b/Screen_Shot_2016_04_08_at_14_12_25.png)
+![animate_map_formation2](http://s9.postimg.org/g1c2ewm5b/Screen_Shot_2016_04_08_at_14_12_25.png)
 
 ```
 my_plot_som_no_confl(us, in, ta)
@@ -70,7 +70,15 @@ my_plot_som_no_confl(crsom, in, ta)
 ```
 plot_crsom_attrs(crsom)
 ```
-![my_plot_som_no_confl](http://s21.postimg.org/mrgyrg1mf/Screen_Shot_2016_04_08_at_14_20_13.png)
+![plot_crsom_attrs](http://s21.postimg.org/mrgyrg1mf/Screen_Shot_2016_04_08_at_14_20_13.png)
+
+```
+animate_citizenship_formation(crsom)
+```
+![animate_citizenship_formation](http://s22.postimg.org/c51126hfl/Screen_Shot_2016_04_08_at_16_57_54.png)
+
+
+
 
 
 ## Contribute
