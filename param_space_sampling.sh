@@ -5,9 +5,9 @@
 #PBS -m e
 #PBS -l nodes=1#excl
 
-PROBLEMS="db-stones-acdc met_mad_la met_mad_la_random1 off-sexp eminem-chemb-am"
-LEARNING_RATES="0.1 0.05"
-EPOCHS="1500 2500"
+PROBLEMS="trend_fail"
+LEARNING_RATES="0.1 0.05 0.01"
+EPOCHS="1000 1500 2500 5000 10000"
 NORMALIZE="4 5"
 MAP_SIZE="1"
 
