@@ -8,7 +8,7 @@ N_SIDE = sqrt(NEURONS);
 win = find(crsom(in(:, i)));
 
 C = vec2ind(ta(:,i));
-H = [col_inx(win, N_SIDE) row_idx(win, N_SIDE) ];
+H = [row_idx(win, N_SIDE) col_inx(win, N_SIDE)];
 
 inner = zeros(M, 1);
 
