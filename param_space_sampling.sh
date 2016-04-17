@@ -5,10 +5,10 @@
 #PBS -m e
 #PBS -l nodes=1#excl
 
-PROBLEMS="trend_fail"
-LEARNING_RATES="0.1 0.05 0.01"
-EPOCHS="1000 1500 2500 5000 10000"
-NORMALIZE="4 5"
+PROBLEMS="katy-ram-investigate2"
+LEARNING_RATES="0.1"
+EPOCHS="500"
+NORMALIZE="0 1 2 3 4 5"
 MAP_SIZE="1"
 
 for p in `echo $PROBLEMS`
