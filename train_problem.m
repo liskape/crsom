@@ -30,7 +30,11 @@ function [ crsom, inputs, targets, untrained, trained_som, ids ] = train_problem
     elseif normalized == 11
         inputs = mapstd(in')*0.25; 
     elseif normalized == 12
-        inputs = mapstd(in')*0.1; 
+        inputs = mapstd(in')*0.1;
+    elseif normalized == 13
+        inputs = mapstd(in')*0.05; 
+    elseif normalized == 14
+        inputs = mapstd(in')*0.01; 
     else
         DONT_KNOW_HOW_TO_NORMALIZE_THIS
     end
