@@ -24,7 +24,13 @@ function [ crsom, inputs, targets, untrained, trained_som, ids ] = train_problem
     elseif normalized == 8
         inputs = mapminmax(in', 0, 0.5);
     elseif normalized == 9
-        inputs = mapminmax(in', -0.25, 0.25);    
+        inputs = mapminmax(in', -0.25, 0.25); 
+    elseif normalized == 10
+        inputs = mapstd(in')*0.5;
+    elseif normalized == 11
+        inputs = mapstd(in')*0.25; 
+    elseif normalized == 12
+        inputs = mapstd(in')*0.1; 
     else
         DONT_KNOW_HOW_TO_NORMALIZE_THIS
     end
