@@ -34,7 +34,21 @@ function [ crsom, inputs, targets, untrained, trained_som, ids ] = train_problem
     elseif normalized == 13
         inputs = mapstd(in')*0.05; 
     elseif normalized == 14
-        inputs = mapstd(in')*0.01; 
+        inputs = mapstd(in')*0.01;
+    elseif normalized == 15
+        inputs = mapminmax(in', 0, 0.9); 
+     elseif normalized == 16
+        inputs = mapminmax(in', 0, 0.8);    
+      elseif normalized == 17
+        inputs = mapminmax(in', 0, 0.7);   
+      elseif normalized == 18
+        inputs = mapminmax(in', 0, 0.6);
+    elseif normalized == 18
+        inputs = mapminmax(in', 0, 0.4);
+    elseif normalized == 19
+        inputs = mapminmax(in', 0, 0.3);
+    elseif normalized == 20
+        inputs = mapminmax(in', 0, 0.2);
     else
         DONT_KNOW_HOW_TO_NORMALIZE_THIS
     end

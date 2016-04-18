@@ -173,16 +173,16 @@ end
 
 
 
-  mean_adjust = zeros(1, param.epochs);
+  mean_adjust = [];
   epoch_adjust = zeros(1, length(u.targets));
   
-  mean_s = zeros(1, param.epochs);
+  mean_s = [];
   epoch_s = zeros(1, length(u.targets));
   
-  mean_sigma = zeros(1, param.epochs);
+  mean_sigma = [];
   epoch_sigma = zeros(1, length(u.targets));
 
-  mean_O_h = zeros(1, param.epochs);
+  mean_O_h = [];
   epoch_O_h = zeros(1, length(u.targets));
   
   
