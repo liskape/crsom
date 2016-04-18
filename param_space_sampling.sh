@@ -8,7 +8,7 @@
 PROBLEMS="katy-ram-investigate2"
 LEARNING_RATES="0.1"
 EPOCHS="500"
-NORMALIZE="10 11 12"
+NORMALIZE="13 14"
 MAP_SIZE="1"
 
 for p in `echo $PROBLEMS`
