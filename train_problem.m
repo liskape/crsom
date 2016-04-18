@@ -49,6 +49,26 @@ function [ crsom, inputs, targets, untrained, trained_som, ids ] = train_problem
         inputs = mapminmax(in', 0, 0.3);
     elseif normalized == 20
         inputs = mapminmax(in', 0, 0.2);
+    elseif normalized == 21
+        inputs = mapminmax(in', -0.9, 0.9);
+    elseif normalized == 22
+        inputs = mapminmax(in', -0.8, 0.8); 
+    elseif normalized == 23
+        inputs = mapminmax(in', -0.7, 0.7); 
+    elseif normalized == 24
+        inputs = mapminmax(in', -0.6, 0.6);
+    elseif normalized == 25
+        inputs = mapminmax(in', -0.5, 0.5);
+    elseif normalized == 26
+        inputs = mapminmax(in', -0.4, 0.4);
+    elseif normalized == 27
+        inputs = mapminmax(in', -0.3, 0.3);
+    elseif normalized == 28
+        inputs = mapminmax(in', -0.2, 0.2);
+    elseif normalized == 29
+        inputs = mapminmax(in', -0.1, 0.1);
+    elseif normalized == 30
+        inputs = mapminmax(in', -0.05, 0.05);
     else
         DONT_KNOW_HOW_TO_NORMALIZE_THIS
     end
