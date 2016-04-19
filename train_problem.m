@@ -85,12 +85,12 @@ function [ crsom, inputs, targets, untrained, trained_som, ids ] = train_problem
         inputs = mapminmax(in', 0, 1.8);
                    elseif normalized == 38
         inputs = mapminmax(in', 0, 1.9);
-                   elseif normalized == 39
+    elseif normalized == 39
         inputs = mapminmax(in', 0, 2);
-        
-        
+   elseif normalized == 40
+        inputs = mapminmax(in', 0, 1.1);
     else
-        DONT_KNOW_HOW_TO_NORMALIZE_THIS
+        inputs = mapminmax(in', 0, normalized/1000);
     end
        
     targets = importdata(strcat(problem, '-ta'))';
