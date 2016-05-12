@@ -1,4 +1,4 @@
-function [ color ] = paintit(assigned_inputs, targets)
+function [ color ] = paintit_gradient(assigned_inputs, targets)
 
 colors = [];
 a = targets(assigned_inputs);
@@ -16,20 +16,19 @@ for i=1:length(a)
 %          end
     if max(targets) == 3
          if class == 1
-            c = [228 26 28];
+            c = [1 1 1];
         elseif class == 2
-            c = [55 126 184];
+            c = [1 0 0];
         elseif class == 3
-            c =[77 175 74]         
+            c =[0 0.5 0.5]        
          end
     elseif max(targets) == 2
          if class == 1
-            c = [228 26 28];
+            c = [1 1 1 ];
         elseif class == 2
-            c = [55 126 184];        
+            c = [1 0 0];        
          end
     end
-    c =c /255;
     
     colors = [colors; c];
     

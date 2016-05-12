@@ -1,4 +1,4 @@
-function [ targets, neurons, song_ids ] = data_for_neuron( crsom, in, ta, ids, x, y )
+function [ song_ids, targets, neurons  ] = data_for_neuron( crsom, in, ta, ids, x, y )
 
     N = crsom.layers{1}.dimensions(1);
 

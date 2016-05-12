@@ -7,7 +7,7 @@ function [ cn ] = context_net2( input, target )
    cn = configure(cn, input, target);
    
 %    random init
-%    cn.b{1} = rand(size(cn.b{1})) * 0.01 - 0.05;
-%    cn.IW{1} = rand(size(cn.IW{1})) * 0.01 - 0.05;
+%    cn.b{1} = (rand(size(cn.b{1})) - 0.5 / 10);
+%    cn.IW{1} = (rand(size(cn.IW{1})) - 0.5) / 10;
 end
 

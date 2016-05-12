@@ -30,27 +30,29 @@ for i=1:length(winners)
        to_plot_rows = [to_plot_rows row_idx(i, N)]; 
        to_plot_cols = [to_plot_cols col_inx(i, N)]; 
        sizes = [sizes sqrt(length(assigned_inputs)) * 150];
-       colors = [colors; paintit(assigned_inputs, targets)];
+       colors = [colors; paintit_gradient(assigned_inputs, targets)];
        
    end
 end
 
-s = scatter(to_plot_cols, to_plot_rows, sizes, colors, 'filled', 'MarkerEdgeColor', [0 0 0]);
+s = scatter(to_plot_cols, to_plot_rows, sizes, colors, 'filled', 'MarkerEdgeColor', [0 0 0], 'LineWidth', 0.01);
 
 if max(targets) == 2
     hold on
-    scatter(0,0,0, [0 0 0], 'filled', 'MarkerEdgeColor', [0 0 0]);
+    scatter(0,0,0, [1 1 1], 'filled', 'MarkerEdgeColor', [0 0 0], 'LineWidth', 0.01);
 end
 grid on
-grid minor
+
 axis([0,N+1,0,N+1])
-xlabel('x-coordinate of neuron')
-ylabel('y-coordinate of neuron')
-% legend('class A', 'class B')
+
+% set(gca,'XTick',0:N+1, 'XMinorTick','on')
+% set(gca,'YTick',0:N+1, 'YMinorTick','on')
+% xlabel('x-coordinate of neuron')
+% ylabel('y-coordinate of neuron')
+
+% legend('Katy Perry', 'Ramones')
+
 set(gca,'Color',[0.5 0.5 0.5]);
 
-if isfield(crsom.userdata, 'net_name')
-    title(crsom.userdata.net_name)
-end
 end
 

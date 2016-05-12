@@ -7,6 +7,6 @@ function [ output_args ] = animate_map_formation( crsom, in, ta)
    end
    
    subplot(3,3,snaps + 1);
-   my_plot_som(crsom, in, ta);
+   my_plot_som_no_confl(crsom, in, ta);
 end
 
